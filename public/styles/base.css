@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+body{
+  background: #3e3d3d;
+}
+main{
+  width: 960px;
+  margin: auto;
+  text-align: center;
+  padding: 15px;
+}
+.main-img{
+    width: 100%;
+}
+.form-book {
+    display: flex;
+    flex-flow: column;
+    padding: 5px 5px;
+}

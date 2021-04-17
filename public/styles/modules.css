@@ -1,0 +1,175 @@
+#serachDiv{
+    width: 200px;
+    margin: auto;
+    height: 420px;
+    float: left;
+    /*background-image: url(https://img.freepik.com/free-vector/abstract-blue-geometric-shapes-background_1035-17545.jpg?size=626&ext=jpg);*/
+    background: #a8a8a88a;
+    margin: 10px 10px;
+    border-radius: 23px;
+    text-align: center;
+    padding: 46px 9px;
+    border: 3px solid black;
+  }
+  
+  #serachDivShows{
+    width: 200px;
+    margin: auto;
+    height: 472px;
+    float: left;
+    /*background-image: url(https://img.freepik.com/free-vector/abstract-blue-geometric-shapes-background_1035-17545.jpg?size=626&ext=jpg);*/
+    background: #a8a8a88a;
+    margin: 10px 10px;
+    border-radius: 23px;
+    text-align: center;
+    padding: 46px 9px;
+    border: 3px solid black;
+  }
+  
+#pIndex{
+    overflow: scroll;
+  }
+  #h3Book{
+    width: 100%;
+    height: 49px;
+    text-align: center;
+    overflow: hidden;
+    padding: 5px 5px;
+    margin: 4px 0px;
+  }
+  #pBook{
+    padding: 5px;
+  }
+  #h4Book{
+    padding: 5px;
+  }
+  #aBook{
+    color: white;
+    text-decoration: none;
+    padding: 6px;
+    opacity: 0.6;
+  }
+  #aBook:hover{
+    color: rgb(252, 255, 74);
+    text-decoration: none;
+    padding: 6px;
+    opacity: 0.6;
+  }
+  #btnBook{
+    background: #00000099;
+    border-radius: 18px;
+    font-size: 18px;
+  }
+  #btnBookShows{
+    background: #00000099;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px;
+  }
+  #btnBookShows:hover{
+  color: wheat;
+  }
+  #btnBookShowsUpdate{
+    background: #00000099;
+    border-radius: 18px;
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px;
+  }
+  #btnBookShowsUpdate:hover{
+  color: wheat;
+  }
+  #h3Index{
+    text-align: center;
+    border: 6px solid;
+    padding: 10px;
+    margin: 10px;
+    font-size: 27px;
+    background: #c0c0c078;
+  }
+  #pBookDetailes{
+    overflow: scroll;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    text-align: justify;
+  }
+  
+  #detailDiv{
+    background: gray;
+      border-radius: 18px;
+      width: 50%;
+      margin: auto;
+      padding: 20px;
+  }
+  /**************************************************/
+  .form-style-6{
+      font: 95% Arial, Helvetica, sans-serif;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 16px;
+      background: #F7F7F7;
+  }
+  .form-style-6 h1{
+      background: #43D1AF;
+      padding: 20px 0;
+      font-size: 140%;
+      font-weight: 300;
+      text-align: center;
+      color: #fff;
+      margin: -16px -16px 16px -16px;
+  }
+  .form-style-6 input[type="text"],
+  .form-style-6 input[type="radoio"],
+  .form-style-6 textarea
+  {
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      background: #fff;
+      margin-bottom: 4%;
+      border: 1px solid #ccc;
+      padding: 3%;
+      color: #555;
+      font: 95% Arial, Helvetica, sans-serif;
+  }
+  .form-style-6 input[type="text"]:focus,
+  .form-style-6 input[type="raodio"]:focus,
+  .form-style-6 textarea:focus
+  {
+      box-shadow: 0 0 5px #020202;
+      padding: 3%;
+      border: 1px solid #43D1AF;
+  }
+  
+  .form-style-6 input[type="submit"],
+  .form-style-6 button{
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+    background: #3e3d3d;
+    border-bottom: 2px solid #000000;
+      border-top-style: none;
+      border-right-style: none;
+      border-left-style: none;	
+      color: #fff;
+    padding: 14px;
+    margin: 18px 0;
+  }
+  .form-style-6 input[type="submit"]:hover,
+  .form-style-6 button:hover{
+      background: #7b7a7a;
+    color: #000000;
+  }
+  #hidden{
+    display: none;
+  }
+  
