@@ -15,5 +15,6 @@ A user can do a reservation
 A user can update or delete the reservation
 ------
 ## Non-Functional Requirements
-- Data Integrity  
-- Reliability
+- usability: our web site is very easy for the user to do the searches with a beautiful and simple interface 
+
+- Supportability: our web site able to maintainability and scalability in the feature that because we used a free API's but there is a lot of unfree API server provide more data and information the user can use them to make his \ her visite more enjoyable 
