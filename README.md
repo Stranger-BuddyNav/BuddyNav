@@ -45,3 +45,22 @@ To build such awesome web application we need a good team, and this team is the 
 
 ---
 <br>
+
+## wireframe
+![](https://raw.githubusercontent.com/Stranger-BuddyNav/BuddyNav/main/Page_2.png)
+![](https://raw.githubusercontent.com/Stranger-BuddyNav/BuddyNav/main/Page_3.png)
+
+<br>
+------
+<br>
+
+## Domain Modeling
+![](https://raw.githubusercontent.com/Stranger-BuddyNav/BuddyNav/main/domain.png)
+
+<br>
+---------
+<br>
+
+## user story
+We use [Trello](https://trello.com/b/kcvdnwQo/buddynav) to organize our work
+
