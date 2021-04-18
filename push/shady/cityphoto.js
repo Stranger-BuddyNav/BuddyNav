@@ -1,39 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-const express = require('express');
-const superagent = require('superagent');
-const pg = require('pg');
-const DATABASE_URL = process.env.DATABASE_URL;
-const NODE_ENV = process.env.NODE_ENV;
-//const options = NODE_ENV === 'production' ? { connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } } : { connectionString: DATABASE_URL };
-//const client = new pg.Client(options);
-
-const methodOverride = require('method-override');
-
-// setupes
-const PORT = process.env.PORT || 3030;
-const app = express();
-
-app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.use(express.static('./public'));
-app.use(methodOverride('_method'));
-
-
-
-// routes
-
-app.get('/', indexHandler);
-
-app.get('/test', locationHandler);
-
-function indexHandler(req, res) {
-    res.render('pages/index');
-}
-
-
-
 function locationHandler(req, res) {
 
     let keyVal = process.env.PIXABAY_KEY;
@@ -67,13 +33,12 @@ function locationHandler(req, res) {
                     console.log('arrrr', arr, nnata);
                     res.render('pages/test', { allData: arr });
                 })
+                .catch(error => {
+                    //console.log('Error in getting data from Google Books server')
+                    console.error(error);
+                    //res.render('pages/error', { errors: error });
+                });
         });
-    .catch (error => {
-        //console.log('Error in getting data from Google Books server')
-        console.error(error);
-        //res.render('pages/error', { errors: error });
-    })
-
 }
 
 function getLatAndLon(keyVal2, text) {
@@ -99,8 +64,6 @@ function getMap(keyVal2, lat, lon) {
     let width = 200;
     let height = 200;
     let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`
-    console.log('tessssssssssssssssssssssssst');
-    console.log(lat, lon, mapURL);
     return mapURL;
 }
 
@@ -108,7 +71,6 @@ function getPhoto(keyVal, text) {
     let pixabayURL = `https://pixabay.com/api/?key=${keyVal}&q=${text}&per_page=10`;
     return superagent.get(pixabayURL)
         .then(pixabayData => {
-            console.log('getPhoto', pixabayData.body.hits);
             let data = pixabayData.body.hits.map(val => {
                 const newPhoto = new CityPhoto(
                     val.webformatURL
@@ -123,12 +85,6 @@ function getPhoto(keyVal, text) {
             //res.render('pages/error', { errors: error });
         })
 };
-
-
-
-
-
-
 
 
 
@@ -170,19 +126,3 @@ function Map(locData) {
     // this.longitude = locData[0].lon;
 
 }
-
-//listen
-
-
-/* client.connect()
-  .then(() => {
-    app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
-  }); */
-
-
-// unfound route
-app.get('*', (req, res) => res.status(404).send('This route does not exist'));
-
-
-
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
