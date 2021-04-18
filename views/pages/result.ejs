@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/reset.css">  
+    <link rel="stylesheet" href="styles/base.css">
+    <title>Search Results</title>
+</head>
+<body>
+    <header>
+        <ul>
+            <li> <a href="/">Home</a></li>
+            <li> <a href="/about-us.html">About us </a></li>
+        </ul>
+    </header>
+    <main>
+        <section class="result-grid">
+           
+            <div>
+                <% All-api[0].forEach(element => {%>
+                    <img src="<%= element.photoLink %> " alt="">
+                    <img src="<%= element %> " alt="">
+                    <% });  %> 
+            </div>
+            <div>
+                <img src=" <%= All-api[1].weather_icons %> " alt="">
+                <h1><%= All-api[1].cityName %> </h1>
+                <h2><%= All-api[1].temperature %> </h2>
+                <h3> <%= All-api[1].weather_descriptions %> </h3>
+            </div> 
+
+            <form action="/saveData" method="get">
+
+                <input type="hidden" name="city" value="<%= All-api[1].cityName  %>">
+                <input type="hidden" name="date" value="<%= All-api[4].updated %>">
+                <input type="hidden" name="image" value="<%= All-api[0][0].photoLink %>">
+
+            <div>
+                <% All-api[2].forEach(element => {%>
+                   
+                    <label> <%= element.name %>  <input type="radio" value=" <%= element.name %>" name="hotelChoice" required></label>
+
+                    <% });  %> 
+            </div>
+            <div>
+                <% All-api[3].forEach(element => {%>
+                   
+                    <label> <%= element.name %>  <input type="radio" value=" <%= element.name %>" name="transportChoice" required></label>
+                     <p><%= element.type %>  </p>
+                    <% });  %> 
+            </div>
+            <button>Save plane</button>
+        </form>
+           
+        </section>
+        <section class="covid">
+            <ul>
+                <li> <%= All-api[4].country %> </li>
+                <li> <%= All-api[4].population %> </li>
+                <li> <%= All-api[4].confirmed %> </li>
+                <li> <%= All-api[4].recovered %> </li>
+                <li> <%= All-api[4].deaths %> </li>
+                <li> <%= All-api[4].updated %> </li>
+            </ul>
+
+        </section>
+        
+    </main>
+    <footer>
+        BuddyNav&copy;2021
+    </footer>
+</body>
+</html>
