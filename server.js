@@ -23,19 +23,19 @@ app.use(methodOverride('_method'));
 // routes
 
 app.get('/', (req, res) => {
-  res.render('pages/weather');
+  res.render('pages/index');
   //res.send('your server ready to use !!');
 });
 
-app.get('/test', allApiHandler);
+app.get('/search', allApiHandler);
 
 app.get('/covid', covidHandler);
 
 // function handler
 
-let appAPiArr = [];
 
 function allApiHandler(req, res) {
+  let appAPiArr = [];
 
   console.log('allApiHandler');
   console.log(req.query);
@@ -60,12 +60,12 @@ function allApiHandler(req, res) {
                     .then(data5 => {
                       console.log('inside-covidHandler------------', data5);
                       appAPiArr.push(data5);
-                      res.render('pages/index', { apiAll: appAPiArr });
-                    })
-                })
-            })
-        })
-    })
+                      res.render('pages/result', { apiAll: appAPiArr });
+                    });
+                });
+            });
+        });
+    });
   console.log('**********************');
   // findHotelsHandler(req, res)
   //   .then(data1 => {
@@ -182,14 +182,14 @@ function getLatAndLon(keyVal2, text) {
       //console.log('Error in getting data from Google Books server')
       console.error(error);
       //res.render('pages/error', { errors: error });
-    })
+    });
 }
 
 
 function getMap(keyVal2, lat, lon) {
   let width = 200;
   let height = 200;
-  let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`
+  let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`;
   return mapURL;
 }
 
@@ -209,8 +209,8 @@ function getPhoto(keyVal, text) {
       //console.log('Error in getting data from Google Books server')
       console.error(error);
       //res.render('pages/error', { errors: error });
-    })
-};
+    });
+}
 
 
 function weatherHandler(req, res) {
@@ -310,7 +310,7 @@ function covidHandler(req) {
       //res.render('../push/Mostafa/h', { countryobj: newCountry });
       return newCountry;
     });
-};
+}
 
 
 
