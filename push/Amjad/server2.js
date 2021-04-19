@@ -33,6 +33,9 @@ app.use(methodOverride('_method'));
 app.get('/', homeRouteHandler);//home route
 app.get('/hotels', findHotelsHandler);
 app.get('/transport',findTransportHandler);
+app.post('/details/:PlanID', showPlanDetails);
+app.put('/updatePlan/:planID',updatePlanHandler);
+app.delete('/deletePlan/:planID',deletePlanHandler);
 app.get('*', notFoundHandler); //error handler
 
 // routes
@@ -99,6 +102,43 @@ function findTransportHandler(req,res){
       res.send(error);
     });
   console.log('after superagent');
+}
+
+function deletePlanHandler (req,res){
+  let SQL = `DELETE FROM booking WHERE id=$1;`;
+  let value = [req.params.planID];
+  client.query(SQL,value)
+    .then(res.redirect('/'));
+  // res.render(`pages/saved`,{obj:safeValues});
+
+}
+
+function showPlanDetails (req,res){
+  let SQL = `SELECT * FROM booking WHERE id=$1;`;
+  let value = [req.params.PlanID];
+  client.query(SQL,value)
+    .then((result) => {
+      res.render('pages/details',{plan:result.rows[0]});
+    });
+}
+
+function updatePlanHandler (req,res){
+  console.log(req.params.PlanID);
+  let {city,image_url,date,hotel,transport} = req.body;
+  let SQL = `UPDATE booking SET city=$1,image_url=$2,date=$3,hotel=$4,transport=$5 WHERE id=$6;`;
+  let safeValues = [city,image_url,date,hotel,transport,req.params.PlanID];
+  client.query(SQL,safeValues)
+    .then(()=>{
+      res.redirect(`/`);
+      // res.render(`pages/saved`,{obj:safeValues});
+      res.redirect(`/details/${req.params.planID}`);
+
+
+
+    }).catch(error=>{
+      res.send(error);
+    });
+
 }
 
 

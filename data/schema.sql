@@ -5,5 +5,5 @@ CREATE TABLE booking (
   image_url VARCHAR(255),
   date VARCHAR(255),
   hotel VARCHAR(255),
-  transport VARCHAR(255),
+  transport VARCHAR(255)
 );
