@@ -104,7 +104,7 @@ function locationHandler(req, res) {
             return getPhoto(keyVal, text)
                 .then(nnata => {
                     //console.log('nnata', nnata);
-                    let idx = Math.floor(Math.random() * 10 + 1);
+                    let idx = Math.floor(Math.random() * 10);
                     if (idx > (nnata.length - 1)) {
                         //console.log('nnata.length', nnata.length);
                         //console.log('sdsdds', arr);
@@ -254,12 +254,15 @@ function findHotelsHandler(req, res) {
                 let imagLink = getPhoto(photoKey, val.name)
                     .then(data => {
                         const newHotel = new Hotel(val, data);
+                        console.log('newHotel', newHotel);
                         hotelsArray.push(newHotel);
+                        console.log('hotelsArray', hotelsArray);
                     })
 
             });
             //res.send(hotelsArray);
-            return gData;
+            console.log('gData', gData);
+            return hotelsArray;
 
         })
 
@@ -383,12 +386,20 @@ function Weather(result) {
 function Hotel(hotelData, data) {
     console.log('----------------------------------------------------------------------------------');
     console.log('Hotel');
+    let notFoundHotelImage = [
+        'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+        'https://image.freepik.com/free-vector/hotel-illustration_146998-4071.jpg',
+        'https://image.freepik.com/free-vector/flat-hotel-building-illustration_23-2148147347.jpg',
+        'https://thumbs.dreamstime.com/b/find-hotel-search-hotels-concept-smartphone-maps-gps-location-building-team-people-modern-flat-style-vector-147792003.jpg',
+        'https://st3.depositphotos.com/4243515/14466/v/600/depositphotos_144663615-stock-illustration-cartoon-hotel-icon.jpg'
+    ];
     let minRate = 1;
     let maxRate = 5;
     let minPrice = 20;
     let maxPrice = 300;
+    let idx = Math.floor(Math.random() * 5);
     this.name = hotelData.name;
-    this.imageLinks = (data.length) ? data : 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg';
+    this.imageLinks = (data.length) ? data[0].photoLink : notFoundHotelImage[idx];
     this.rate = Math.floor(Math.random() * (maxRate - minRate) + minRate);
     this.price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
     console.log('this.name--->', this.name, 'this.imageLinks---->', this.imageLinks, this.rate, this.price);
