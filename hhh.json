@@ -1,0 +1,120 @@
+[
+  [
+    Location {
+      search_query: 'Barcelona',
+      formatted_query: 'Barcelona, Barcelonès, Barcelona, Catalonia, 08001, Spain',
+      latitude: '41.3828939',
+      longitude: '2.1774322'
+    },
+    {
+      map_url: 'https://maps.locationiq.com/v2/staticmap?key=pk.acd988184572816bd21c9bb9133d4cee&center=41.3828939,2.1774322&size=200x200&zoom=12'
+    },
+    CityPhoto {
+      city_url: 'https://pixabay.com/get/g02d9c751534048bd4a1135fa1f5dc6ac7135b6a3b2c16be59abfd3aa7b5f77dca6c340f016e46ee464bfee3edee2cc9e_640.jpg'
+    }
+  ],
+  Weather {
+    cityName: 'Barcelona',
+    country: 'Spain',
+    time: '2021-04-20 11:09',
+    temperature: 15,
+    weather_icons: [
+      'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png'
+    ],
+    weather_descriptions: [ 'Partly cloudy' ]
+  },
+  [
+    Hotel {
+      hotel_name: 'Casa Camper Barcelona',
+      hotel_image: 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+      hotel_rate: 2,
+      hotel_price: 173
+    },
+    Hotel {
+      hotel_name: 'Mandarin Oriental, Barcelona',
+      hotel_image: 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+      hotel_rate: 2,
+      hotel_price: 36
+    },
+    Hotel {
+      hotel_name: 'Barcelonaguest Apartments',
+      hotel_image: 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+      hotel_rate: 4,
+      hotel_price: 126
+    },
+    Hotel {
+      hotel_name: 'W Barcelona',
+      hotel_image: [Array],
+      hotel_rate: 2,
+      hotel_price: 36
+    }
+  ],
+  [
+    Transport {
+      station_name: 'Barcelona (BCN-Barcelona Intl.)',
+      station_type: 'AIRPORT',
+      transport_price: 11
+    },
+    Transport {
+      station_name: 'Barcelona Paseo de Gracia Station',
+      station_type: 'TRAIN_STATION',
+      transport_price: 36
+    }
+  ],
+  Covid {
+    country: 'Spain',
+    population: 46354321,
+    confirmed: 3428354,
+    recovered: 150376,
+    deaths: 77102,
+    updated: 'NO DATA'
+  }
+]
+
+
+[
+  {
+    id: 13,
+    city: 'Barcelona',
+    city_id: 13,
+    map_url: '{"map_url":"https://maps.locationiq.com/v2/staticmap?key=pk.acd988184572816bd21c9bb9133d4cee&center=41.3828939,2.1774322&size=200x200&zoom=12"}',
+    city_url: null
+  },
+  {
+    //done
+    id: 3,
+    city: 'Barcelona',
+    city_id: 13,
+    hotel_image: 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+    hotel_name: 'Casa Camper Barcelona',
+    hotel_price: '173',
+    hotel_rate: '2'
+  },
+  {
+    //done
+    id: 27,
+    city: 'Barcelona',
+    city_id: 13,
+    station_name: 'Barcelona (BCN-Barcelona Intl.)',
+    station_type: 'AIRPORT',
+    transport_price: '11'
+  },
+  Weather {
+    cityName: 'Barcelona',
+    country: 'Spain',
+    time: '2021-04-20 11:09',
+    temperature: 15,
+    weather_icons: [
+      'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png'
+    ],
+    weather_descriptions: [ 'Partly cloudy' ]
+  },
+  Covid {
+    country: 'Spain',
+    population: 46354321,
+    confirmed: 3428354,
+    recovered: 150376,
+    deaths: 77102,
+    updated: 'NO DATA'
+  }
+]

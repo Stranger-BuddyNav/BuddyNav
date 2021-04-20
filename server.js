@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 require('dotenv').config();
 const express = require('express');
@@ -36,8 +36,8 @@ app.get('/search', allApiHandler);
 app.get('/saveData', saveDataHandler);
 app.get('/allSavedData', allSavedDataHandler);
 app.post('/details/:PlanID', showPlanDetails);
-app.put('/updatePlan/:planID',updatePlanHandler);
-app.delete('/deletePlan/:planID',deletePlanHandler);
+app.put('/updatePlan/:planID', updatePlanHandler);
+app.delete('/deletePlan/:planID', deletePlanHandler);
 
 // function handler
 
@@ -47,34 +47,34 @@ function allApiHandler(req, res) {
 
   // console.log('allApiHandler');
   // console.log(req.query);
-  let SQL ='SELECT id FROM city WHERE city =$1;';
+  let SQL = 'SELECT id FROM city WHERE city =$1;';
   let safeValue = [req.query.search];
-  Client.query(SQL,safeValue).then(data =>{
+  Client.query(SQL, safeValue).then(data => {
     console.log(!(data.rows.length));
-    if(!(data.rows.length)){
-      let SQL= 'insert into city (city) values($1) returning id;';
-      let safevalue=[req.query.search];
-      Client.query(SQL,safevalue).then(data0=>{
+    if (!(data.rows.length)) {
+      let SQL = 'insert into city (city) values($1) returning id;';
+      let safevalue = [req.query.search];
+      Client.query(SQL, safevalue).then(data0 => {
         console.log(data0.rows[0].id);
-        let a = locationHandler(req, res,data0.rows[0].id)
+        let a = locationHandler(req, res, data0.rows[0].id)
           .then(data1 => {
             // console.log('inside-locationHandler------------', data1);
             appAPiArr.push(data1);
-            let b = weatherHandler(req, res)
+            let b = findHotelsHandler(req, res, data0.rows[0].id)
               .then(data2 => {
                 // console.log('inside-weatherHandler------------', data2);
                 appAPiArr.push(data2);
-                let c = findHotelsHandler(req, res,data0.rows[0].id)
+                let c = findTransportHandler(req, res, data0.rows[0].id)
                   .then(data3 => {
-                  // console.log('inside-findHotelsHandler------------', data3);
+                    console.log('inside-findHotelsHandler------------', data3);
                     appAPiArr.push(data3);
-                    let d = findTransportHandler(req, res,data0.rows[0].id)
+                    let d = weatherHandler(req, res)
                       .then(data4 => {
                         // console.log('inside-findTransportHandler------------', data4);
                         appAPiArr.push(data4);
                         // console.log('1111111111111111111111111111111111111111111111111', data2.country);
                         // console.log(data2.country);
-                        let f = covidHandler(data2.country)
+                        let f = covidHandler(data4.country)
                           .then(data5 => {
                             // console.log('inside-covidHandler------------', data5);
                             appAPiArr.push(data5);
@@ -86,24 +86,25 @@ function allApiHandler(req, res) {
           });
       });
     }
-    else{
-      let id =data.rows[0].id;
-      console.log('ttttttttt',id);
-      let SQL ='select * from city as c join locationdata as l on l.city_id = c.id where c.id =$1;';
-      let safevalue= [data.rows[0].id];
-      Client.query(SQL,safevalue).then(result =>{
-        appAPiArr.push(result);});
+    else {
+      let id = data.rows[0].id;
+      console.log('ttttttttt', id);
+      let SQL = 'select * from city as c join locationdata as l on l.city_id = c.id where c.id =$1;';
+      let safevalue = [data.rows[0].id];
+      Client.query(SQL, safevalue).then(result => {
+        appAPiArr.push(result.rows[0]);
+      });
       let sql = 'select * from city as c join hoteldata as h on h.city_id=c.id where c.id =$1;';
-      let safeval= [data.rows[0].id];
-      Client.query(sql,safeval)
+      let safeval = [data.rows[0].id];
+      Client.query(sql, safeval)
         .then(result1 => {
-          appAPiArr.push(result1);
+          appAPiArr.push(result1.rows);
         });
       let sql1 = 'select * from city as c join transportdata as t on t.city_id = c.id where c.id =$1;';
-      let safevalu= [data.rows[0].id];
-      Client.query(sql1,safevalu)
+      let safevalu = [data.rows[0].id];
+      Client.query(sql1, safevalu)
         .then(result2 => {
-          appAPiArr.push(result2);
+          appAPiArr.push(result2.rows);
         });
       let b = weatherHandler(req, res)
         .then(data2 => {
@@ -137,7 +138,7 @@ function allApiHandler(req, res) {
 }
 
 
-function locationHandler(req, res,id) {
+function locationHandler(req, res, id) {
   // console.log('----------------------------------------------------------------------------------');
   // console.log('locationHandler');
   let keyVal = process.env.PIXABAY_KEY;
@@ -152,30 +153,38 @@ function locationHandler(req, res,id) {
   return getLatAndLon(keyVal2, text)
     .then(data => {
       //console.log('data', data)
-      let map = getMap(keyVal2, data.latitude, data.longitude);
-      arr.push(data, map);
+      //let map_url = { map_url: getMap(keyVal2, data.latitude, data.longitude) };
+      let map_photo = getMap(keyVal2, data.latitude, data.longitude);
+      //arr.push(map_url);
       return getPhoto(keyVal, text)
         .then(nnata => {
-          //console.log('nnata', nnata);
-          let idx = Math.floor(Math.random() * 10 + 1);
-          if (idx > (nnata.length - 1)) {
-            //console.log('nnata.length', nnata.length);
-            //console.log('sdsdds', arr);
-            arr.push(nnata);
+          console.log('nnata', nnata);
+          let photoData;
+          let idx = Math.floor(Math.random() * 10);
+          let location;
+          if (nnata.length && idx > (nnata.length - 1)) {
+            photoData = nnata;
+            location = { map_url: map_photo, city_url: photoData[idx].city_url };
+            arr.push(location);
           } else {
-            arr.push(nnata[idx]);
-            //console.log('sdsdds', arr);
+            photoData = 'https://i.pinimg.com/originals/55/c7/8a/55c78aa24fb722350d6832301e973ba4.png';
+            location = { map_url: map_photo, city_url: photoData };
+            arr.push(location);
           }
-          let map_url = arr[1];
-          let city_url= arr[2].photoLink;
-          let SQL= 'INSERT INTO locationdata ( map_url , city_url,city_id) VALUES ($1,$2,$3);';
-          let safeValues= [map_url,city_url,id];
-          Client.query(SQL,safeValues).then(data=> console.log('done'));
+          // let map_url = arr[0].map_photo;
+          // let city_url = arr[0].city_url;
+          let map_url = location.map_url;
+          let city_url = location.city_url;
+          console.log('city', city_url);
+          console.log('location', location);
+          let SQL = 'INSERT INTO locationdata ( map_url , city_url,city_id) VALUES ($1,$2,$3);';
+          let safeValues = [map_url, city_url, id];
+          Client.query(SQL, safeValues).then(data => console.log('done'));
 
           // console.log('arrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
           // console.log('arrrr', arr, nnata);
           //res.render('pages/test', { allData: arr });
-          return arr;
+          return location;
         })
 
         .catch(error => {
@@ -249,8 +258,8 @@ function getLatAndLon(keyVal2, text) {
 function getMap(keyVal2, lat, lon) {
   let width = 200;
   let height = 200;
-  let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`;
-  return mapURL;
+  let map_url = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`;
+  return map_url;
 }
 
 function getPhoto(keyVal, text) {
@@ -258,9 +267,7 @@ function getPhoto(keyVal, text) {
   return superagent.get(pixabayURL)
     .then(pixabayData => {
       let data = pixabayData.body.hits.map(val => {
-        const newPhoto = new CityPhoto(
-          val.webformatURL
-        );
+        const newPhoto = new CityPhoto(val.webformatURL);
         return newPhoto;
       });
       return data;
@@ -295,7 +302,7 @@ function weatherHandler(req, res) {
 }
 
 
-function findHotelsHandler(req, res,id) {
+function findHotelsHandler(req, res, id) {
   // console.log('----------------------------------------------------------------------------------');
   // console.log('locationHandler');
   let hotelsArray = [];
@@ -315,18 +322,17 @@ function findHotelsHandler(req, res,id) {
           .then(data => {
             const newHotel = new Hotel(val, data);
             hotelsArray.push(newHotel);
+            console.log('cccccccccccccccccccccccc', id);
+            let SQL = 'INSERT INTO hoteldata ( hotel_image, hotel_name , hotel_price , hotel_rate,city_id) VALUES ($1,$2,$3,$4,$5);';
+            let safeValues = [newHotel.hotel_image, newHotel.hotel_name, newHotel.hotel_price, newHotel.hotel_rate, id];
+            Client.query(SQL, safeValues).then(data => console.log('Hotel-done'));
+
           });
 
       });
-
-      hotelsArray.forEach(element => {
-        let SQL= 'INSERT INTO hoteldata ( hotel_image, hotel_name , hotel_price , hotel_rate,city_id) VALUES ($1,$2,$3,$4,$5);';
-
-        let safeValues= [element.hotel_image,element.hotel_name,element.hotel_price,element.hotel_rate,id];
-        Client.query(SQL,safeValues).then(data=> console.log('done'));
-      });
       //res.send(hotelsArray);
-      return gData;
+      console.log('beforeReturn', hotelsArray);
+      return hotelsArray;
 
     })
 
@@ -340,7 +346,7 @@ function findHotelsHandler(req, res,id) {
 }
 
 
-function findTransportHandler(req, res,id) {
+function findTransportHandler(req, res, id) {
   let transArray = [];
   let cityName = req.query.search;
   let transKey = process.env.TRANS_KEY;
@@ -355,15 +361,20 @@ function findTransportHandler(req, res,id) {
       gData.map(val => {
         const newTrans = new Transport(val);
         transArray.push(newTrans);
+        //console.log(id, 'transCheck', (newTrans));
+        if (Object.keys(newTrans).length) {
+          let SQL = 'INSERT INTO transportdata ( station_name, station_type , transport_price,city_id) VALUES ($1,$2,$3,$4);';
+          let safeValues = [newTrans.station_name, newTrans.station_type, newTrans.transport_price, id];
+          Client.query(SQL, safeValues).then(data => console.log('done'));
+        } else {
+          let SQL = 'INSERT INTO transportdata ( station_name, station_type , transport_price,city_id) VALUES ($1,$2,$3,$4);';
+          let safeValues = ['Not available', 'Not available', 'Not available', id];
+          Client.query(SQL, safeValues).then(data => console.log('done'));
+        }
+
       });
       //res.send(transArray);
-      transArray.forEach(element => {
-        let SQL= 'INSERT INTO transportdata ( station_name, station_type , transport_price,city_id) VALUES ($1,$2,$3,$4);';
-
-        let safeValues= [element.station_name,element.station_type,element.transport_price,id];
-        Client.query(SQL,safeValues).then(data=> console.log('done'));
-      });
-      return gData;
+      return transArray;
     })
     .catch(error => {
       // console.log('inside superagent');
@@ -377,10 +388,13 @@ function findTransportHandler(req, res,id) {
 
 
 function covidHandler(req) {
-  // if(req === 'US' ){
-  //   let
-  // }
-  let countryName = req;
+  let countryName;
+  if (req === 'United States of America') {
+    countryName = 'US';
+  } else {
+    countryName = req;
+  }
+  console.log(countryName);
   let capitlizedCountry = countryName.charAt(0).toUpperCase() + countryName.slice(1);
   let url = `https://covid-api.mmediagroup.fr/v1/cases?country=${capitlizedCountry}`;
   return superagent.get(url)
@@ -415,38 +429,38 @@ function allSavedDataHandler(req, res) {
     });
 }
 
-function deletePlanHandler (req,res){
+function deletePlanHandler(req, res) {
   let SQL = `DELETE FROM booking WHERE id=$1;`;
   let value = [req.params.planID];
-  Client.query(SQL,value)
+  Client.query(SQL, value)
     .then(res.redirect('/'));
   // res.render(`pages/saved`,{obj:safeValues});
 
 }
 
-function showPlanDetails (req,res){
+function showPlanDetails(req, res) {
   let SQL = `SELECT * FROM booking WHERE id=$1;`;
   let value = [req.params.PlanID];
-  Client.query(SQL,value)
+  Client.query(SQL, value)
     .then((result) => {
-      res.render('pages/details',{plan:result.rows[0]});
+      res.render('pages/details', { plan: result.rows[0] });
     });
 }
 
-function updatePlanHandler (req,res){
+function updatePlanHandler(req, res) {
   // console.log(req.params.PlanID);
-  let {city,image_url,date,hotel,transport} = req.body;
+  let { city, image_url, date, hotel, transport } = req.body;
   let SQL = `UPDATE booking SET city=$1,image_url=$2,date=$3,hotel=$4,transport=$5 WHERE id=$6;`;
-  let safeValues = [city,image_url,date,hotel,transport,req.params.PlanID];
-  Client.query(SQL,safeValues)
-    .then(()=>{
+  let safeValues = [city, image_url, date, hotel, transport, req.params.PlanID];
+  Client.query(SQL, safeValues)
+    .then(() => {
       res.redirect(`/`);
       // res.render(`pages/saved`,{obj:safeValues});
       res.redirect(`/details/${req.params.planID}`);
 
 
 
-    }).catch(error=>{
+    }).catch(error => {
       res.send(error);
     });
 
@@ -460,12 +474,13 @@ function Covid(covidData) {
   this.confirmed = covidData.confirmed;
   this.recovered = covidData.recovered;
   this.deaths = covidData.deaths;
-  this.updated = (covidData.updated)?covidData.updated:'NO DATA';
+  this.updated = (covidData.updated) ? covidData.updated : 'NO DATA';
 }
 
 const CityPhoto = function (photoLink) {
   //console.log('CityPhoto', photoLink);
-  this.photoLink = photoLink;
+  console.log('photoLink', photoLink);
+  this.city_url = photoLink;
   CityPhoto.all.push(this);
 };
 CityPhoto.all = [];
@@ -511,17 +526,26 @@ function Weather(result) {
 }
 
 function Hotel(hotelData, data) {
-  // console.log('----------------------------------------------------------------------------------');
-  // console.log('Hotel');
+
+  console.log('----------------------------------------------------------------------------------');
+  console.log('Hotel');
+  let notFoundHotelImage = [
+    'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+    'https://image.freepik.com/free-vector/hotel-illustration_146998-4071.jpg',
+    'https://image.freepik.com/free-vector/flat-hotel-building-illustration_23-2148147347.jpg',
+    'https://thumbs.dreamstime.com/b/find-hotel-search-hotels-concept-smartphone-maps-gps-location-building-team-people-modern-flat-style-vector-147792003.jpg',
+    'https://st3.depositphotos.com/4243515/14466/v/600/depositphotos_144663615-stock-illustration-cartoon-hotel-icon.jpg'
+  ];
   let minRate = 1;
   let maxRate = 5;
   let minPrice = 20;
   let maxPrice = 300;
+  let idx = Math.floor(Math.random() * 5);
   this.hotel_name = hotelData.name;
-  this.hotel_image = (data.length) ? data : 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg';
+  this.hotel_image = (data.length) ? data[0].city_url : notFoundHotelImage[idx];
   this.hotel_rate = Math.floor(Math.random() * (maxRate - minRate) + minRate);
   this.hotel_price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
-  // console.log('this.name--->', this.name, 'this.imageLinks---->', this.imageLinks, this.rate, this.price);
+  console.log('this.name--->', this.hotel_name, 'this.imageLinks---->', this.city_url, this.hotel_rate, this.hotel_price);
 }
 
 
