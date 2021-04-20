@@ -249,6 +249,79 @@ a.pure-button-primary {
   width: 100%;
 }
 
+#searchForm{
+  text-align: center;
+}
+#searchForm input{
+  width: 20em
+  }
+  
+
+/*
+start button css 
+*/
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+  border: none;
+  outline: 0;
+  text-decoration: none;
+  color: inherit;
+  color: rgba(255, 255, 255, 0.788);
+
+}
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background:  #0a67a5;
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
+}
+.cta span {
+  position: relative;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #111;  color: white;
+
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+.cta:hover:before {
+  width: 100%;
+  background: #1e74ad;
+}
+.cta:hover svg {
+  transform: translateX(0);
+}
+.cta:active {
+  transform: scale(0.96);
+}
+/* 
+end button css
+*/
+
+
+
 /*
 * -- TABLET (AND UP) MEDIA QUERIES --
 * On tablets and other medium-sized devices, we want to customize some
@@ -305,3 +378,4 @@ a.pure-button-primary {
       font-size: 300%;
   }
 }
+
