@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 require('dotenv').config();
 const express = require('express');
@@ -119,20 +119,6 @@ function allApiHandler(req, res) {
         });
     }
 
-    // console.log('**********************');
-    // findHotelsHandler(req, res)
-    //   .then(data1 => {
-
-    //     console.log('locationHandler');
-    //     // appAPiArr.push(data1);
-
-    //     // console.log('data1', data1);
-    //     return data1;
-    //   })
-    // findHotelsHandler(req, res);
-    // findTransportHandler(req, res);
-    // covidHandler(req, res);
-
 
   });
 }
@@ -196,45 +182,6 @@ function locationHandler(req, res, id) {
   //return latAndLon;
 }
 
-// function locationHandler(req) {
-
-//   let keyVal = process.env.PIXABAY_KEY;
-
-//   console.log('-------------------------------------------------------------', req);
-
-//   let text = req;
-
-//   let keyVal2 = process.env.LOCATION_KEY;
-
-//   let arr = [];
-//   let latAndLon = getLatAndLon(keyVal2, text)
-//     .then(data => {
-//       //console.log('data', data)
-//       //console.log('lat', lat);
-//       let map = getMap(keyVal2, data.latitude, data.longitude);
-//       arr.push(data, map);
-//       return getPhoto(keyVal, text)
-//         .then(nnata => {
-//           //console.log('nnata', nnata);
-//           let idx = Math.floor(Math.random() * 10 + 1);
-//           if (idx > (nnata.length - 1)) {
-//             //console.log('nnata.length', nnata.length);
-//             arr.push(nnata);
-//           } else {
-//             arr.push(nnata[idx]);
-//           }
-//           //console.log('arrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-//           //console.log('arrrr', arr, nnata);
-//           //res.render('pages/test', { allData: arr });
-//         })
-//         .catch(error => {
-//           //console.log('Error in getting data from Google Books server')
-//           console.error(error);
-//           //res.render('pages/error', { errors: error });
-//         });
-//     });
-
-// }
 
 function getLatAndLon(keyVal2, text) {
   let locationURL = `https://eu1.locationiq.com/v1/search.php?key=${keyVal2}&q=${text}&format=json`;
@@ -412,9 +359,10 @@ function covidHandler(req) {
 // DataBase Functions
 
 function saveDataHandler(req, res) {
-  let { city, map_url, hotel_name, station_name, time } = req.query;
-  let SQL = `INSERT INTO booking (city, map_url, hotel_name, station_name, time) VALUES ($1, $2, $3, $4, $5);`;
-  let safeValues = [city, map_url, hotel_name, station_name, time];
+
+  let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price } = req.query;
+  let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+  let safeValues = [city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price];
   Client.query(SQL, safeValues)
     .then(data => {
       res.redirect('/allSavedData');
@@ -425,7 +373,7 @@ function allSavedDataHandler(req, res) {
   let SQL = 'SELECT * FROM booking;';
   Client.query(SQL)
     .then(data => {
-      res.render('pages/saved', { bookingData: data });
+      res.render('pages/saved', { bookingData: data.rows });
     });
 }
 
@@ -545,7 +493,7 @@ function Hotel(hotelData, data) {
   this.hotel_image = (data.length) ? data[0].city_url : notFoundHotelImage[idx];
   this.hotel_rate = Math.floor(Math.random() * (maxRate - minRate) + minRate);
   this.hotel_price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
-  console.log('this.name--->', this.hotel_name, 'this.imageLinks---->', this.city_url, this.hotel_rate, this.hotel_price);
+  console.log('this.name--->', this.hotel_name, 'this.imageLinks---->', this.hotel_image, this.hotel_rate, this.hotel_price);
 }
 
 
@@ -557,43 +505,6 @@ function Transport(transData) {
   this.transport_price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
 }
 
-// let ctx = document.getElementById( 'myChart' ).getContext( '2d' );
-// new Chart( ctx, {
-//   type: 'bar',
-//   data: {
-//     labels:nameArr,
-//     datasets: [
-//       {
-//         label: '# of clicks',
-//         data: clicksArr,
-//         backgroundColor: ['rgba(255, 99, 132, 0.2)','yellow','black','brown','green','blue','purple','gray',
-//           'pink','white','#ffaec0','#6ddccf','#e40017','#99bbad','#e36bae','#161d6f','#eb5e0b','orange','#ffcc29','#ef4f4f'],
-//         borderColor: 'rgba(255, 99, 132, 1)',
-//         borderWidth: 5
-//       },
-//       {
-//         label: '# of shown',
-//         data: shownArr,
-//         backgroundColor: ['rgba(255, 99, 132, 0.2)','#99bbad','yellow','#ef4f4f','brown','#ffaec0','blue','#ffcc29',
-//           '#161d6f','#eb5e0b','#ffaec0','purple','#e40017','black','#e36bae','pink','white','orange','gray','green'],
-//         borderColor: 'rgba(255, 99, 132, 1)',
-//         borderWidth: 5
-//       }
-//     ]
-//   },
-//   options: {
-//     scales: {
-//       yAxes: [{
-//         ticks: {
-//           beginAtZero: true
-//         }
-//       }]
-//     }
-//   }
-// } );
-
-
-//constructors
 
 // unfound route
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));

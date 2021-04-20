@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A layout example that shows off a responsive product landing page.">
     <link rel="stylesheet" href="styles/reset.css">  
-    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>BuddyNav</title>
 </head>
-<body>
-
+<body> 
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="">Your Site</a>
@@ -28,43 +27,49 @@
         <p class="splash-subhead">
             Your friend wherever you go!
         </p>
-        <!-- <p>
-            <a href="http://purecss.io" class="pure-button pure-button-primary">Get Started</a>
-        </p> -->
     </div>
 </div>
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head is-center">Excepteur sint occaecat cupidatat.</h2>
+        <h2 class="content-head is-center">Search for your destination:</h2>
 
-        <div class="pure-g">
+        <div class="pure-g" id="searchForm">
             <form action="/search" method="GET">
-                <input type="text" name='search'  placeholder="City Name"> <br><br>
-                <button  class="pure-button pure-button-primary">Go</button>
+                <input type="text" name='search' placeholder="City Name"> <br><br>
+                <button class="cta" class="pure-button pure-button-primary">
+                    <span> Search City</span>
+                    <svg width="13px" height="10px" viewBox="0 0 13 10">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                    </svg>
+                  </button>
             </form>
             
     </div>
 
     <div class="ribbon l-box-lrg pure-g">
         <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="/img/common/file-icons.png">
+            <img width="600" alt="File Icons" class="pure-img-responsive" src="Images/explore.jpg">
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
 
-            <h2 class="content-head content-head-ribbon">Laboris nisi ut aliquip.</h2>
+            <h2 class="content-head content-head-ribbon">What is BuddyNav?</h2>
 
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor.
+                BuddyNav is a web application that helps you and guide you with your journeys plans. So, what is the BuddyNav Let us read this story from one of our stakeholders.
+
+                Mr. Aront said "Always when I want to have a plan to travel outside my country, I searched in more than website to get details about the city or country that i want to visit"
+                
+                And he added " I wish if there is a way to have those information in one place, and regarding the COVID-19, I really want to know about the its details in this country"
+                
+                So, we asked him about what is the information that you are willing to have, the answer " You know the needed information; like the weather statues, hotels, transportation and the COVID-19 details."
             </p>
         </div>
     </div>
 
     <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
+        <h2 class="content-head is-center"></h2>
 
         <div class="pure-g">
            
@@ -73,7 +78,7 @@
     </div>
 
     <div class="footer l-box is-center">
-        View the source of this layout to learn more. Made with love by the Pure Team.
+        BuddyNav&copy;2021 Powered by Strangers group
     </div>
 
 </div>

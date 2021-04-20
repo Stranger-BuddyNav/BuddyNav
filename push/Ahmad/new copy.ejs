@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
 <div class="banner">
     
      
-               <% console.log(apiAll) %> 
+               
     <img src="<%= apiAll[0].city_url %> " alt="" id="city"> <br>
     <h2 class="title1"><%= apiAll[3].cityName %> </h1> <br>
     <div class="grid">
@@ -101,17 +103,9 @@
 
 <form action="/saveData" method="get" class="form">
 
-    <input type="hidden" name="cityName" value="<%= apiAll[3].cityName  %>">
-     <input type="hidden" name="map_url" value="<%= apiAll[0].map_url %>">
-     <input type="hidden" name="city_url" value="<%= apiAll[0].city_url %>">
-     <input type="hidden" name="time" value="<%= apiAll[3].time %>">
-     <input type="hidden" name="hotel_name" value="<%= apiAll[1].hotel_name  %>">
-     <input type="hidden" name="hotel_price" value="<%= apiAll[1].hotel_price %>">
-     <input type="hidden" name="hotel_rate" value="<%= apiAll[1].hotel_rate %>">
-     <input type="hidden" name="hotel_img" value="<%= apiAll[1].hotel_img %>">
-     <input type="hidden" name="station_name" value="<%= apiAll[2].station_name  %>">
-     <input type="hidden" name="station_type" value="<%= apiAll[2].station_type %>">
-     <input type="hidden" name="transport_price" value="<%= apiAll[2].transport_price %>">
+    <input type="hidden" name="city" value="<%= apiAll[3].cityName  %>">
+     <input type="hidden" name="date" value="<%= apiAll[3].time %>">
+     <input type="hidden" name="image" value="<%= apiAll[0].city_url %>">
 
 
  <section class="light">
@@ -120,17 +114,18 @@
  <div class="grid1">
 
     
-  <% apiAll[1].forEach(element => {%>
+  <% apiAll[2].forEach(element => {%>
       
     
       <div>
         <h5><%= element.hotel_name %></h5>
-        <img src="<%= element.hotel_image %>" class="imagehotel" alt="Hotel">
-        <p>Rating: <%= element.hotel_rate %> stars</p> 
-        <p>Price:  $<%= element.hotel_price %> </p> 
+        <img src="Images/pexels-photo-207962.jpeg" class="imagehotel" alt="Hotel">
+        
+    <p>Rating: <%= element.hotel_rate %> star</p> 
+    <p>Price:  $<%= element.hotel_price %> </p> 
      
         <label> 
-            <input type="radio" name="hotel_name" value=" <%= element.hotel_name %>" checked>
+            <input type="radio" name="hotelChoice" value=" <%= element.hotel_name %>" checked>
             <span class="design"></span>
             <span class="text"></span>
             Select Hotel
@@ -155,14 +150,14 @@
       
        <!-- <div> -->
       <label>
-          <input type="radio" name="station_name" value=" <%= element.station_name %>" checked>
+          <input type="radio" name="transportChoice" value=" <%= element.station_name %>" checked>
         <span class="design"></span>
         <span class="text"></span>
         <%= element.station_name %>
       </label>
 
       <p><%= element.station_type %>  </p>
-      <p>Price: $<%= element.transport_price %>  </p>
+      <p>Price: $<%= element.station_price %>  </p>
     <!-- </div>  -->
 
 
@@ -250,8 +245,10 @@
 
 
 
-<div class="footer l-box is-center">
-    BuddyNav&copy;2021 Powered by Strangers group
+<div class="footer l-box">
+    <p>
+        <a href="#">Try now</a> for 14 days. No credit card required. Header image courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
+    </p>
 </div>
 
 </body>
