@@ -23,8 +23,8 @@ app.use(methodOverride('_method'));
 // routes
 
 app.get('/', (req, res) => {
-    res.render('pages/index');
-    //res.send('your server ready to use !!');
+  res.render('pages/index');
+  //res.send('your server ready to use !!');
 });
 
 app.get('/search', allApiHandler);
@@ -35,56 +35,57 @@ app.get('/covid', covidHandler);
 
 
 function allApiHandler(req, res) {
-    let appAPiArr = [];
+  let appAPiArr = [];
 
-    console.log('allApiHandler');
-    console.log(req.query);
-    let a = locationHandler(req, res)
-        .then(data1 => {
-            console.log('inside-locationHandler------------', data1);
-            appAPiArr.push(data1);
-            let b = weatherHandler(req, res)
-                .then(data2 => {
-                    console.log('inside-weatherHandler------------', data2);
-                    appAPiArr.push(data2);
-                    let c = findHotelsHandler(req, res)
-                        .then(data3 => {
-                            console.log('inside-findHotelsHandler------------', data3);
-                            appAPiArr.push(data3);
-                            let d = findTransportHandler(req, res)
-                                .then(data4 => {
-                                    console.log('inside-findTransportHandler------------', data4);
-                                    appAPiArr.push(data4);
-                                    console.log('1111111111111111111111111111111111111111111111111', data2.country);
-                                    let f = covidHandler(data2.country)
-                                        .then(data5 => {
-                                            console.log('inside-covidHandler------------', data5);
-                                            appAPiArr.push(data5);
-                                            res.render('pages/result', { apiAll: appAPiArr });
-                                        });
-                                });
-                        });
+  console.log('allApiHandler');
+  console.log(req.query);
+  let a = locationHandler(req, res)
+    .then(data1 => {
+      console.log('inside-locationHandler------------', data1);
+      appAPiArr.push(data1);
+      let b = weatherHandler(req, res)
+        .then(data2 => {
+          console.log('inside-weatherHandler------------', data2);
+          appAPiArr.push(data2);
+          let c = findHotelsHandler(req, res)
+            .then(data3 => {
+              console.log('inside-findHotelsHandler------------', data3);
+              appAPiArr.push(data3);
+              let d = findTransportHandler(req, res)
+                .then(data4 => {
+                  console.log('inside-findTransportHandler------------', data4);
+                  appAPiArr.push(data4);
+                  console.log('1111111111111111111111111111111111111111111111111', data2.country);
+                  let f = covidHandler(data2.country)
+                    .then(data5 => {
+                      console.log('inside-covidHandler------------', data5);
+                      appAPiArr.push(data5);
+                      res.render('pages/result', { apiAll: appAPiArr });
+                    });
                 });
+            });
         });
-    console.log('**********************');
-    // findHotelsHandler(req, res)
-    //   .then(data1 => {
+    });
+  console.log('**********************');
+  // findHotelsHandler(req, res)
+  //   .then(data1 => {
 
-    //     console.log('locationHandler');
-    //     // appAPiArr.push(data1);
+  //     console.log('locationHandler');
+  //     // appAPiArr.push(data1);
 
-    //     // console.log('data1', data1);
-    //     return data1;
-    //   })
-    // findHotelsHandler(req, res);
-    // findTransportHandler(req, res);
-    // covidHandler(req, res);
+  //     // console.log('data1', data1);
+  //     return data1;
+  //   })
+  // findHotelsHandler(req, res);
+  // findTransportHandler(req, res);
+  // covidHandler(req, res);
 
 
 }
 
 
 function locationHandler(req, res) {
+
     console.log('----------------------------------------------------------------------------------');
     console.log('locationHandler');
     let keyVal = process.env.PIXABAY_KEY;
@@ -124,7 +125,8 @@ function locationHandler(req, res) {
                     //res.render('pages/error', { errors: error });
                 });
         });
-    //return latAndLon;
+    });
+  //return latAndLon;
 }
 
 // function locationHandler(req) {
@@ -168,74 +170,75 @@ function locationHandler(req, res) {
 // }
 
 function getLatAndLon(keyVal2, text) {
-    let locationURL = `https://eu1.locationiq.com/v1/search.php?key=${keyVal2}&q=${text}&format=json`;
+  let locationURL = `https://eu1.locationiq.com/v1/search.php?key=${keyVal2}&q=${text}&format=json`;
 
-    return superagent.get(locationURL)
-        .then(locationData => {
-            //console.log('getLatAndLon', locationData.body);
+  return superagent.get(locationURL)
+    .then(locationData => {
+      //console.log('getLatAndLon', locationData.body);
 
-            let locData = locationData.body;
-            const newLocationData = new Location(text, locData);
-            return newLocationData;
-        })
-        .catch(error => {
-            //console.log('Error in getting data from Google Books server')
-            console.error(error);
-            //res.render('pages/error', { errors: error });
-        });
+      let locData = locationData.body;
+      const newLocationData = new Location(text, locData);
+      return newLocationData;
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      //res.render('pages/error', { errors: error });
+    });
 }
 
 
 function getMap(keyVal2, lat, lon) {
-    let width = 200;
-    let height = 200;
-    let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`;
-    return mapURL;
+  let width = 200;
+  let height = 200;
+  let mapURL = `https://maps.locationiq.com/v2/staticmap?key=${keyVal2}&center=${lat},${lon}&size=${width}x${height}&zoom=12`;
+  return mapURL;
 }
 
 function getPhoto(keyVal, text) {
-    let pixabayURL = `https://pixabay.com/api/?key=${keyVal}&q=${text}&per_page=10`;
-    return superagent.get(pixabayURL)
-        .then(pixabayData => {
-            let data = pixabayData.body.hits.map(val => {
-                const newPhoto = new CityPhoto(
-                    val.webformatURL
-                );
-                return newPhoto;
-            });
-            return data;
-        })
-        .catch(error => {
-            //console.log('Error in getting data from Google Books server')
-            console.error(error);
-            //res.render('pages/error', { errors: error });
-        });
+  let pixabayURL = `https://pixabay.com/api/?key=${keyVal}&q=${text}&per_page=10`;
+  return superagent.get(pixabayURL)
+    .then(pixabayData => {
+      let data = pixabayData.body.hits.map(val => {
+        const newPhoto = new CityPhoto(
+          val.webformatURL
+        );
+        return newPhoto;
+      });
+      return data;
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      //res.render('pages/error', { errors: error });
+    });
 }
 
 
 function weatherHandler(req, res) {
-    console.log('----------------------------------------------------------------------------------');
-    console.log('weatherHandler');
-    let key = process.env.WEATHER_KEY;
-    let cityName = req.query.search;
-    cityName.charAt(0).toUpperCase() + cityName.slice(1);
-    let url = `http://api.weatherstack.com/current?access_key=${key}&query=${cityName}`;
-    return superagent(url)
-        .then(result => {
-            let dataWeather = result.body;
-            console.log(dataWeather);
-            let myData = new Weather(dataWeather);
-            console.log('fffffffffffffffffffffff');
+  console.log('----------------------------------------------------------------------------------');
+  console.log('weatherHandler');
+  let key = process.env.WEATHER_KEY;
+  let cityName = req.query.search;
+  cityName.charAt(0).toUpperCase() + cityName.slice(1);
+  let url = `http://api.weatherstack.com/current?access_key=${key}&query=${cityName}`;
+  return superagent(url)
+    .then(result => {
+      let dataWeather = result.body;
+      console.log(dataWeather);
+      let myData = new Weather(dataWeather);
+      console.log('fffffffffffffffffffffff');
 
-            //res.render('pages/test', { bookDataArray: myData });
-            // res.send(myData);
-            return myData;
-        });
-    // res.send('your server work');
+      //res.render('pages/test', { bookDataArray: myData });
+      // res.send(myData);
+      return myData;
+    });
+  // res.send('your server work');
 }
 
 
 function findHotelsHandler(req, res) {
+
     console.log('----------------------------------------------------------------------------------');
     console.log('locationHandler');
     let hotelsArray = [];
@@ -277,47 +280,47 @@ function findHotelsHandler(req, res) {
 
 
 function findTransportHandler(req, res) {
-    let transArray = [];
-    let cityName = req.query.search;
-    let transKey = process.env.TRANS_KEY;
-    let hotelsURL = `https://hotels-com-provider.p.rapidapi.com/v1/destinations/search?locale=en_US&currency=USD&query=${cityName}&rapidapi-key=${transKey}`;
-    return superagent.get(hotelsURL) //send request to weatherbit.io API
-        .then(geoData => {
-            console.log('----------------------------------------------------------------------------------');
-            console.log('insigeoDatade superagent');
-            // console.log(geoData);
-            // let gData= geoData.body.searchResults.results;
-            let gData = geoData.body.suggestions[3].entities;
-            gData.map(val => {
-                const newTrans = new Transport(val);
-                transArray.push(newTrans);
-            });
-            //res.send(transArray);
-            return gData;
-        })
-        .catch(error => {
-            console.log('inside superagent');
-            console.log('Error in getting data from hotels server');
-            console.error(error);
-            //res.send(error);
-        });
-    console.log('after superagent');
+  let transArray = [];
+  let cityName = req.query.search;
+  let transKey = process.env.TRANS_KEY;
+  let hotelsURL = `https://hotels-com-provider.p.rapidapi.com/v1/destinations/search?locale=en_US&currency=USD&query=${cityName}&rapidapi-key=${transKey}`;
+  return superagent.get(hotelsURL) //send request to weatherbit.io API
+    .then(geoData => {
+      console.log('----------------------------------------------------------------------------------');
+      console.log('insigeoDatade superagent');
+      // console.log(geoData);
+      // let gData= geoData.body.searchResults.results;
+      let gData = geoData.body.suggestions[3].entities;
+      gData.map(val => {
+        const newTrans = new Transport(val);
+        transArray.push(newTrans);
+      });
+      //res.send(transArray);
+      return gData;
+    })
+    .catch(error => {
+      console.log('inside superagent');
+      console.log('Error in getting data from hotels server');
+      console.error(error);
+      //res.send(error);
+    });
+  console.log('after superagent');
 }
 
 
 
 function covidHandler(req) {
-    let countryName = req;
-    let capitlizedCountry = countryName.charAt(0).toUpperCase() + countryName.slice(1);
-    let url = `https://covid-api.mmediagroup.fr/v1/cases?country=${capitlizedCountry}`;
-    return superagent.get(url)
-        .then(result => {
-            // console
-            let gettedData = result.body.All;
-            let newCountry = new Covid(gettedData);
-            //res.render('../push/Mostafa/h', { countryobj: newCountry });
-            return newCountry;
-        });
+  let countryName = req;
+  let capitlizedCountry = countryName.charAt(0).toUpperCase() + countryName.slice(1);
+  let url = `https://covid-api.mmediagroup.fr/v1/cases?country=${capitlizedCountry}`;
+  return superagent.get(url)
+    .then(result => {
+      // console
+      let gettedData = result.body.All;
+      let newCountry = new Covid(gettedData);
+      //res.render('../push/Mostafa/h', { countryobj: newCountry });
+      return newCountry;
+    });
 }
 
 
@@ -328,62 +331,63 @@ function covidHandler(req) {
 
 //constructors
 function Covid(covidData) {
-    this.country = covidData.country;
-    this.population = covidData.population;
-    this.confirmed = covidData.confirmed;
-    this.recovered = covidData.recovered;
-    this.deaths = covidData.deaths;
-    this.updated = covidData.updated;
+  this.country = covidData.country;
+  this.population = covidData.population;
+  this.confirmed = covidData.confirmed;
+  this.recovered = covidData.recovered;
+  this.deaths = covidData.deaths;
+  this.updated = covidData.updated;
 }
 
 const CityPhoto = function (photoLink) {
-    //console.log('CityPhoto', photoLink);
-    this.photoLink = photoLink;
-    CityPhoto.all.push(this);
+  //console.log('CityPhoto', photoLink);
+  this.photoLink = photoLink;
+  CityPhoto.all.push(this);
 };
 CityPhoto.all = [];
 
 function Location(cityName, locData) {
-    //console.log('Location', locData);
-    /*     {
+  //console.log('Location', locData);
+  /*     {
             "search_query": "seattle",
             "formatted_query": "Seattle, WA, USA",
             "latitude": "47.606210",
             "longitude": "-122.332071"
         } */
 
-    this.search_query = cityName;
-    this.formatted_query = locData[0].display_name;
-    this.latitude = locData[0].lat;
-    this.longitude = locData[0].lon;
+  this.search_query = cityName;
+  this.formatted_query = locData[0].display_name;
+  this.latitude = locData[0].lat;
+  this.longitude = locData[0].lon;
 
 }
 function Map(locData) {
-    //console.log('locData', locData);
-    /*     {
+  //console.log('locData', locData);
+  /*     {
             "search_query": "seattle",
             "formatted_query": "Seattle, WA, USA",
             "latitude": "47.606210",
             "longitude": "-122.332071"
         } */
 
-    //this.search_query = cityName;
-    // this.formatted_query = locData[0].display_name;
-    // this.latitude = locData[0].lat;
-    // this.longitude = locData[0].lon;
+  //this.search_query = cityName;
+  // this.formatted_query = locData[0].display_name;
+  // this.latitude = locData[0].lat;
+  // this.longitude = locData[0].lon;
 
 }
 
 function Weather(result) {
-    this.cityName = result.location.name;
-    this.country = result.location.country;
-    this.time = result.location.localtime;
-    this.temperature = result.current.temperature;
-    this.weather_icons = result.current.weather_icons;
-    this.weather_descriptions = result.current.weather_descriptions;
+  this.cityName = result.location.name;
+  this.country = result.location.country;
+  this.time = result.location.localtime;
+  this.temperature = result.current.temperature;
+  this.weather_icons = result.current.weather_icons;
+  this.weather_descriptions = result.current.weather_descriptions;
 }
 
 function Hotel(hotelData, data) {
+
     console.log('----------------------------------------------------------------------------------');
     console.log('Hotel');
     let notFoundHotelImage = [
@@ -407,11 +411,11 @@ function Hotel(hotelData, data) {
 
 
 function Transport(transData) {
-    let minPrice = 10;
-    let maxPrice = 50;
-    this.name = transData.name;
-    this.type = transData.type;
-    this.price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
+  let minPrice = 10;
+  let maxPrice = 50;
+  this.name = transData.name;
+  this.type = transData.type;
+  this.price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
 }
 
 // let ctx = document.getElementById( 'myChart' ).getContext( '2d' );
