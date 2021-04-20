@@ -85,43 +85,45 @@ function allApiHandler(req, res) {
 
 
 function locationHandler(req, res) {
-  console.log('----------------------------------------------------------------------------------');
-  console.log('locationHandler');
-  let keyVal = process.env.PIXABAY_KEY;
 
-  console.log(req.query.text);
+    console.log('----------------------------------------------------------------------------------');
+    console.log('locationHandler');
+    let keyVal = process.env.PIXABAY_KEY;
 
-  let text = req.query.search;
+    console.log(req.query.text);
 
-  let keyVal2 = process.env.LOCATION_KEY;
+    let text = req.query.search;
 
-  let arr = [];
-  return getLatAndLon(keyVal2, text)
-    .then(data => {
-      //console.log('data', data)
-      let map = getMap(keyVal2, data.latitude, data.longitude);
-      arr.push(data, map);
-      return getPhoto(keyVal, text)
-        .then(nnata => {
-          //console.log('nnata', nnata);
-          let idx = Math.floor(Math.random() * 10 + 1);
-          if (idx > (nnata.length - 1)) {
-            //console.log('nnata.length', nnata.length);
-            //console.log('sdsdds', arr);
-            arr.push(nnata);
-          } else {
-            arr.push(nnata[idx]);
-            //console.log('sdsdds', arr);
-          }
-          //console.log('arrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-          //console.log('arrrr', arr, nnata);
-          //res.render('pages/test', { allData: arr });
-          return arr;
-        })
-        .catch(error => {
-          //console.log('Error in getting data from Google Books server')
-          console.error(error);
-          //res.render('pages/error', { errors: error });
+    let keyVal2 = process.env.LOCATION_KEY;
+
+    let arr = [];
+    return getLatAndLon(keyVal2, text)
+        .then(data => {
+            //console.log('data', data)
+            let map = getMap(keyVal2, data.latitude, data.longitude);
+            arr.push(data, map);
+            return getPhoto(keyVal, text)
+                .then(nnata => {
+                    //console.log('nnata', nnata);
+                    let idx = Math.floor(Math.random() * 10);
+                    if (idx > (nnata.length - 1)) {
+                        //console.log('nnata.length', nnata.length);
+                        //console.log('sdsdds', arr);
+                        arr.push(nnata);
+                    } else {
+                        arr.push(nnata[idx]);
+                        //console.log('sdsdds', arr);
+                    }
+                    //console.log('arrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+                    //console.log('arrrr', arr, nnata);
+                    //res.render('pages/test', { allData: arr });
+                    return arr;
+                })
+                .catch(error => {
+                    //console.log('Error in getting data from Google Books server')
+                    console.error(error);
+                    //res.render('pages/error', { errors: error });
+                });
         });
     });
   //return latAndLon;
@@ -236,40 +238,44 @@ function weatherHandler(req, res) {
 
 
 function findHotelsHandler(req, res) {
-  console.log('----------------------------------------------------------------------------------');
-  console.log('locationHandler');
-  let hotelsArray = [];
-  let cityName = req.query.search;
-  let hotelsKey = process.env.HOTELS_KEY;
-  let photoKey = process.env.PIXABAY_KEY;
-  let hotelsURL = `https://hotels-com-provider.p.rapidapi.com/v1/destinations/search?locale=en_US&currency=USD&query=${cityName}&rapidapi-key=${hotelsKey}`;
-  return superagent.get(hotelsURL) //send request to weatherbit.io API
-    .then(geoData => {
-      console.log('inside superagent');
-      // console.log(geoData);
-      // let gData= geoData.body.searchResults.results;
-      let gData = geoData.body.suggestions[1].entities;
 
-      gData.map(val => {
-        let imagLink = getPhoto(photoKey, val.name)
-          .then(data => {
-            const newHotel = new Hotel(val, data);
-            hotelsArray.push(newHotel);
-          });
+    console.log('----------------------------------------------------------------------------------');
+    console.log('locationHandler');
+    let hotelsArray = [];
+    let cityName = req.query.search;
+    let hotelsKey = process.env.HOTELS_KEY;
+    let photoKey = process.env.PIXABAY_KEY;
+    let hotelsURL = `https://hotels-com-provider.p.rapidapi.com/v1/destinations/search?locale=en_US&currency=USD&query=${cityName}&rapidapi-key=${hotelsKey}`;
+    return superagent.get(hotelsURL) //send request to weatherbit.io API
+        .then(geoData => {
+            console.log('inside superagent');
+            // console.log(geoData);
+            // let gData= geoData.body.searchResults.results;
+            let gData = geoData.body.suggestions[1].entities;
 
-      });
-      //res.send(hotelsArray);
-      return gData;
+            gData.map(val => {
+                let imagLink = getPhoto(photoKey, val.name)
+                    .then(data => {
+                        const newHotel = new Hotel(val, data);
+                        console.log('newHotel', newHotel);
+                        hotelsArray.push(newHotel);
+                        console.log('hotelsArray', hotelsArray);
+                    })
 
-    })
+            });
+            //res.send(hotelsArray);
+            console.log('gData', gData);
+            return hotelsArray;
 
-    .catch(error => {
-      console.log('inside superagent');
-      console.log('Error in getting data from hotels server');
-      console.error(error);
-      //res.send(error);
-    });
-  console.log('after superagent');
+        })
+
+        .catch(error => {
+            console.log('inside superagent');
+            console.log('Error in getting data from hotels server');
+            console.error(error);
+            //res.send(error);
+        });
+    console.log('after superagent');
 }
 
 
@@ -381,17 +387,26 @@ function Weather(result) {
 }
 
 function Hotel(hotelData, data) {
-  console.log('----------------------------------------------------------------------------------');
-  console.log('Hotel');
-  let minRate = 1;
-  let maxRate = 5;
-  let minPrice = 20;
-  let maxPrice = 300;
-  this.name = hotelData.name;
-  this.imageLinks = (data.length) ? data : 'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg';
-  this.rate = Math.floor(Math.random() * (maxRate - minRate) + minRate);
-  this.price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
-  console.log('this.name--->', this.name, 'this.imageLinks---->', this.imageLinks, this.rate, this.price);
+
+    console.log('----------------------------------------------------------------------------------');
+    console.log('Hotel');
+    let notFoundHotelImage = [
+        'https://image.freepik.com/free-vector/lifestyle-hotel-illustration_335657-398.jpg',
+        'https://image.freepik.com/free-vector/hotel-illustration_146998-4071.jpg',
+        'https://image.freepik.com/free-vector/flat-hotel-building-illustration_23-2148147347.jpg',
+        'https://thumbs.dreamstime.com/b/find-hotel-search-hotels-concept-smartphone-maps-gps-location-building-team-people-modern-flat-style-vector-147792003.jpg',
+        'https://st3.depositphotos.com/4243515/14466/v/600/depositphotos_144663615-stock-illustration-cartoon-hotel-icon.jpg'
+    ];
+    let minRate = 1;
+    let maxRate = 5;
+    let minPrice = 20;
+    let maxPrice = 300;
+    let idx = Math.floor(Math.random() * 5);
+    this.name = hotelData.name;
+    this.imageLinks = (data.length) ? data[0].photoLink : notFoundHotelImage[idx];
+    this.rate = Math.floor(Math.random() * (maxRate - minRate) + minRate);
+    this.price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
+    console.log('this.name--->', this.name, 'this.imageLinks---->', this.imageLinks, this.rate, this.price);
 }
 
 
