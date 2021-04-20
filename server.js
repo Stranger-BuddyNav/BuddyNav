@@ -43,7 +43,7 @@ app.delete('/deletePlan/:planID',deletePlanHandler);
 
 function allApiHandler(req, res) {
   let appAPiArr = [];
-  
+
 
   // console.log('allApiHandler');
   // console.log(req.query);
@@ -55,7 +55,7 @@ function allApiHandler(req, res) {
       let SQL= 'insert into city (city) values($1) returning id;';
       let safevalue=[req.query.search];
       Client.query(SQL,safevalue).then(data0=>{
-        console.log(data0.rows[0].id)
+        console.log(data0.rows[0].id);
         let a = locationHandler(req, res,data0.rows[0].id)
           .then(data1 => {
             // console.log('inside-locationHandler------------', data1);
@@ -73,6 +73,7 @@ function allApiHandler(req, res) {
                         // console.log('inside-findTransportHandler------------', data4);
                         appAPiArr.push(data4);
                         // console.log('1111111111111111111111111111111111111111111111111', data2.country);
+                        // console.log(data2.country);
                         let f = covidHandler(data2.country)
                           .then(data5 => {
                             // console.log('inside-covidHandler------------', data5);
@@ -88,41 +89,51 @@ function allApiHandler(req, res) {
     else{
       let id =data.rows[0].id;
       console.log('ttttttttt',id);
-      let SQL ='select * from city as c join locationdata as l on l.city_id = c.id join hoteldata as h on h.city_id=c.id join transportdata as t on t.city_id = c.id where c.id =$1;';
+      let SQL ='select * from city as c join locationdata as l on l.city_id = c.id where c.id =$1;';
       let safevalue= [data.rows[0].id];
       Client.query(SQL,safevalue).then(result =>{
-        result.rows.forEach(ele=>appAPiArr.push(ele));
-        let b = weatherHandler(req, res)
-          .then(data2 => {
-            // console.log('inside-weatherHandler------------', data2);
-            appAPiArr.push(data2);
-            let f = covidHandler(data2.country)
-              .then(data5 => {
-                // console.log('inside-covidHandler------------', data5);
-                appAPiArr.push(data5);
-                res.render('pages/result', { apiAll: appAPiArr });
-              });
-          });
-      });
+        appAPiArr.push(result);});
+      let sql = 'select * from city as c join hoteldata as h on h.city_id=c.id where c.id =$1;';
+      let safeval= [data.rows[0].id];
+      Client.query(sql,safeval)
+        .then(result1 => {
+          appAPiArr.push(result1);
+        });
+      let sql1 = 'select * from city as c join transportdata as t on t.city_id = c.id where c.id =$1;';
+      let safevalu= [data.rows[0].id];
+      Client.query(sql1,safevalu)
+        .then(result2 => {
+          appAPiArr.push(result2);
+        });
+      let b = weatherHandler(req, res)
+        .then(data2 => {
+          // console.log('inside-weatherHandler------------', data2);
+          appAPiArr.push(data2);
+          let f = covidHandler(data2.country)
+            .then(data5 => {
+              // console.log('inside-covidHandler------------', data5);
+              appAPiArr.push(data5);
+              res.render('pages/result', { apiAll: appAPiArr });
+            });
+        });
     }
 
+    // console.log('**********************');
+    // findHotelsHandler(req, res)
+    //   .then(data1 => {
+
+    //     console.log('locationHandler');
+    //     // appAPiArr.push(data1);
+
+    //     // console.log('data1', data1);
+    //     return data1;
+    //   })
+    // findHotelsHandler(req, res);
+    // findTransportHandler(req, res);
+    // covidHandler(req, res);
+
+
   });
-
-  // console.log('**********************');
-  // findHotelsHandler(req, res)
-  //   .then(data1 => {
-
-  //     console.log('locationHandler');
-  //     // appAPiArr.push(data1);
-
-  //     // console.log('data1', data1);
-  //     return data1;
-  //   })
-  // findHotelsHandler(req, res);
-  // findTransportHandler(req, res);
-  // covidHandler(req, res);
-
-
 }
 
 
@@ -366,6 +377,9 @@ function findTransportHandler(req, res,id) {
 
 
 function covidHandler(req) {
+  // if(req === 'US' ){
+  //   let
+  // }
   let countryName = req;
   let capitlizedCountry = countryName.charAt(0).toUpperCase() + countryName.slice(1);
   let url = `https://covid-api.mmediagroup.fr/v1/cases?country=${capitlizedCountry}`;
