@@ -101,76 +101,23 @@
 
 
 
-<form action="/saveData" method="get" class="form">
 
- <section class="light">
+<section class="light">
 
-    <h1> Hotels </h1>
- <div class="grid1">
-
-    
-  <% apiAll[2].forEach(element => {%>
-      
-    
-      <div>
-        <h5><%= element.name %></h5>
-        <img src="Images/pexels-photo-207962.jpeg" class="imagehotel" alt="Hotel">
+    <h1>(Light) Radio</h1>
+  <div>
+    <% apiAll[2].forEach(element => {%>
         
-    <p>Rating: 5 stars</p> 
-    <p>Price:  $200 </p> 
-     
-        <label> 
-            <input type="radio" name="hotelChoice" value=" <%= element.name %>" checked>
-            <span class="design"></span>
-            <span class="text"></span>
-            Select Hotel
-             
-        </label>
-     </div> 
-    
+    <label> <%= element.name %>
+        <input type="radio" name="light" value=" <%= element.name %>" checked>
+      <span class="design"></span>
+      <span class="text"></span>
+    </label>
     <% });  %> 
 </div>
   
     
   </section>
-
-  <section class="light">
-
-    <h1> Transport </h1>
-    <div class="grid1">
-   
-      
-      
-      <% apiAll[3].forEach(element => {%>
-      
-       <!-- <div> -->
-      <label>
-          <input type="radio" name="transportChoice" value=" <%= element.name %>" checked>
-        <span class="design"></span>
-        <span class="text"></span>
-        <%= element.name %>
-      </label>
-
-      <p><%= element.type %>  </p>
-      <p>Price:  $50 </p>
-    <!-- </div>  -->
-
-
-      <% });  %> 
-     
-  </div>
-    
-      
-    </section> 
-    <button class="cta">
-        <span> Save Plane</span>
-        <svg width="13px" height="10px" viewBox="0 0 13 10">
-          <path d="M1,5 L11,5"></path>
-          <polyline points="8 1 12 5 8 9"></polyline>
-        </svg>
-      </button>
-    <!-- <button class="btn">Save plane</button> -->
-</form>
   
 <div class="l-content">
        <h1 class="title"> COVID-19  </h1>
@@ -186,7 +133,7 @@
                     </span>
                 </div>
                 <ul class="pricing-table-list">
-                <li>last update <%= apiAll[1].time %></li>
+                    <li>last update <%= apiAll[4].updated %></li>
                     
                 </ul>
                 
@@ -206,7 +153,7 @@
                         <%= apiAll[4].recovered %>  <span> </span>
                     </span>
                     <ul class="pricing-table-list">
-                        <li>last update <%= apiAll[1].time %></li>
+                        <li>last update <%= apiAll[4].updated %></li>
                         
                     </ul>
                     
@@ -226,7 +173,7 @@
                     </span>
                 </div>
                 <ul class="pricing-table-list">
-                    <li>last update <%= apiAll[1].time %></li>
+                    <li>last update <%= apiAll[4].updated %></li>
                     
                 </ul>
                 
