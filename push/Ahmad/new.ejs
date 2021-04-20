@@ -26,13 +26,14 @@
 
 <div class="banner">
     
-     <% console.log(apiAll) %> 
-    <img src="<%= apiAll[0].city_url %> " alt="" id="city"> <br>
-    <h2 class="title1"><%= apiAll[3].cityName %> </h1> <br>
+     
+               
+    <img src="<%= apiAll[0][2].photoLink %> " alt="" id="city"> <br>
+    <h2 class="title1"><%= apiAll[1].cityName %> </h1> <br>
     <div class="grid">
       
      <img src="Images/pexels-photo-207962.jpeg" alt="">
-     <img src="<%=apiAll[0].map_url  %> " alt="" id="map">
+     <img src="<%=apiAll[0][1]  %> " alt="" id="map">
      <img src="Images/restaurant-beans-coffee-cup.jpg" alt="">
     </div>
                    
@@ -51,7 +52,7 @@
                     <h2></h2>
 
                     <span class="pricing-table-price">
-                        <%= apiAll[3].temperature %> °C <span> </span>
+                        <%= apiAll[1].temperature %> °C <span> </span>
                     </span>
 
                 </div>
@@ -67,7 +68,7 @@
                     <h2> </h2>
                     
                     <span class="pricing-table-price">
-                        <img src=" <%= apiAll[3].weather_icons %> " alt="" class="imagIcon">   <span> </span>
+                        <img src=" <%= apiAll[1].weather_icons %> " alt="" class="imagIcon">   <span> </span>
                     </span>
                 </div>
                
@@ -83,7 +84,7 @@
 
                     <span class="pricing-table-price width " >
 
-                     <%= apiAll[3].weather_descriptions %>
+                     <%= apiAll[1].weather_descriptions %>
                     <span> </span>
                     </span>
                 </div>
@@ -100,7 +101,6 @@
 
 
 
-
 <form action="/saveData" method="get" class="form">
 
     <input type="hidden" name="city" value="<%= apiAll[1].cityName  %>">
@@ -109,18 +109,6 @@
 
 
  <section class="light">
-
-  <% apiAll[1].forEach(element => {%>
-    <label>
-      <input type="radio" name="options"  value=" <%= element.hotel_name %>" checked />
-     
-      <span class="radio"></span>
-      <span class="label"> <%= element.hotel_name %></span>
-    </label>
-  <% });  %> 
-
-</div>
-
 
     <h1> Hotels </h1>
  <div class="grid1">
@@ -133,7 +121,6 @@
         <h5><%= element.name %></h5>
         <img src="Images/pexels-photo-207962.jpeg" class="imagehotel" alt="Hotel">
         
-
     <p>Rating: 5 stars</p> 
     <p>Price:  $200 </p> 
      
@@ -146,13 +133,6 @@
         </label>
      </div> 
     
-
-    <label> <%= element.station_name %>
-        <input type="radio" name="light" value=" <%= element.station_name %>" checked>
-      <span class="design"></span>
-      <span class="text"></span>
-    </label>
-
     <% });  %> 
 </div>
   
