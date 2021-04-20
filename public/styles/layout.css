@@ -1,4 +1,4 @@
-header{
+.header{
     padding: 5px 5px;
     display: flex;
     justify-content: space-between;
@@ -10,27 +10,27 @@ header{
     align-items: center;
 }
 
-header h1 {
+.header h1 {
     background: azure;
     opacity: 0.5;
     padding: 5px;
     border-radius: 15px;
     font-size: 28px;
 }
-header nav {
+.header nav {
     /*background: azure;*/
     opacity: 0.5;
     padding: 5px;
     font-size: 22px;
 }
-header nav a {
+.header nav a {
     padding: 10px;
     color: white;
     background: #575757;
     border-radius: 18px;
     text-decoration: none;
 }
-header nav a:hover {
+.header nav a:hover {
   padding: 10px;
   color: rgb(0, 0, 0);
   background: #ffffff;
