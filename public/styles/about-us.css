@@ -1,0 +1,53 @@
+#about-section{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-gap: 20px;
+    align-items: stretch;
+    text-align: center;
+}
+
+#about-section div img{
+    width: 14em;
+    height: 14em;
+}
+
+#about-section > div {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+    background-color: rgba(118, 118, 201, 0.781);
+    width: 20em;
+    padding-top: 1em;
+  }
+  header{
+      background-color: rgb(3, 59, 133);
+      padding: 1.2em;
+      height: 4em;
+  }
+  header ul{
+/* display: flex;
+justify-content:right; */
+  } 
+
+  header ul li {
+        height: 3em;
+        padding: 0 1em;
+        float: right;
+        line-height: 3em;
+
+  }
+
+  a{
+      color: cornsilk;
+      text-decoration: none;
+      font-weight: bold;
+      border: .002em solid white;
+      padding: 1px;
+  }
+  a:hover{
+      background-color: black;
+      color: darkblue;
+  }
+
+  #logo {
+      float: left;
+  }
