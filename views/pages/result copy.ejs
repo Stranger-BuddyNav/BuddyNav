@@ -87,7 +87,8 @@
                         </h5>
                         <img src="<%= element.hotel_image %>" class="imagehotel" alt="Hotel">
                         <p>Rating: <%= element.hotel_rate %> stars</p>
-                        <p>Price: $<%= element.hotel_price %></p>
+                        <p>Price: $<%= element.hotel_price %>
+                        </p>
                         <label>
                             <input type="radio" name="hotel_name" value=" <%= element.hotel_name %>" checked>
                             <span class="design"></span>
@@ -97,7 +98,6 @@
                             <input type="hidden" name="hotel_rate" value="<%= element.hotel_rate %>">
                             <input type="hidden" name="hotel_img" value="<%= element.hotel_image %>">
                         </label>
-                        
                     </div>
                     <% }); %>
             </div>
