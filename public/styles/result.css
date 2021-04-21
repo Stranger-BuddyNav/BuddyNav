@@ -32,13 +32,13 @@ p {
  * -- MENU STYLES --
  * Make the menu have a very faint box-shadow.
  */
-.pure-menu {
+/* .pure-menu {
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 
 .pure-menu-link {
     padding: .5em .7em;
-}
+} */
 
 
 /*
@@ -571,7 +571,11 @@ span.width {
     height:92.4px ;
 }
 
-
+/* @import "header.css";
+#logo {
+  width: 10em;
+  height: 7em;
+} */
 
 @media(min-width: 767px) {
 
