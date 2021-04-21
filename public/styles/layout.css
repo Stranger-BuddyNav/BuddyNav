@@ -38,27 +38,26 @@
   text-decoration: none;
 }
 
-footer{
+/* footer{
     padding: 5px 5px;
     display: flex;
-    /*background-image: url(https://cdn.pixabay.com/photo/2015/07/27/19/12/library-863148_1280.jpg);*/
     background: black;
     width: 100%;
     height: 8%;
     background-size: cover;
     align-items: center;
     justify-content: center;
-}
-
+} */
+/* 
 footer p {
     background: azure;
     opacity: 0.5;
     padding: 5px;
     font-size: 22px;
     border-radius: 15px;
-}
-img {
+} */
+/* img {
     width: 155px;
     height: 230px;
     border: 4px solid black;
-  }
+  } */
