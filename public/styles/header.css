@@ -146,3 +146,11 @@ a:-webkit-any-link {
     width: 10em;
     height: 7em;
 }
+.footer {
+    background: #111;
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    padding: 1.5em;
+    color: #7f8c8d;
+  }

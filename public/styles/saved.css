@@ -110,3 +110,12 @@ body {
   .cta:active {
     transform: scale(0.96);
   }
+
+  .footer {
+    background: #111;
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    padding: 1.5em;
+    color: #7f8c8d;
+  }
