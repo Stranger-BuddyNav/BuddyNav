@@ -149,7 +149,7 @@ function locationHandler(req, res, id) {
           let photoData;
           let idx = Math.floor(Math.random() * 10);
           let location;
-          if (nnata.length && idx > (nnata.length - 1)) {
+          if ((nnata.length) || (idx > (nnata.length - 1))) {
             photoData = nnata;
             location = { map_url: map_photo, city_url: photoData[idx].city_url };
             arr.push(location);
@@ -178,6 +178,7 @@ function locationHandler(req, res, id) {
           //console.log('Error in getting data from Google Books server')
           console.error(error);
           //res.render('pages/error', { errors: error });
+          res.render('pages/errors', { errors: error });
         });
     });
   //return latAndLon;
@@ -245,7 +246,13 @@ function weatherHandler(req, res) {
       //res.render('pages/test', { bookDataArray: myData });
       // res.send(myData);
       return myData;
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
     });
+
   // res.send('your server work');
 }
 
@@ -275,6 +282,11 @@ function findHotelsHandler(req, res, id) {
             let safeValues = [newHotel.hotel_image, newHotel.hotel_name, newHotel.hotel_price, newHotel.hotel_rate, id];
             Client.query(SQL, safeValues).then(data => console.log('Hotel-done'));
 
+          })
+          .catch(error => {
+            //console.log('Error in getting data from Google Books server')
+            console.error(error);
+            res.render('pages/errors', { errors: error });
           });
 
       });
@@ -283,12 +295,10 @@ function findHotelsHandler(req, res, id) {
       return hotelsArray;
 
     })
-
     .catch(error => {
-      // console.log('inside superagent');
-      // console.log('Error in getting data from hotels server');
+      //console.log('Error in getting data from Google Books server')
       console.error(error);
-      //res.send(error);
+      res.render('pages/errors', { errors: error });
     });
   // console.log('after superagent');
 }
@@ -325,10 +335,9 @@ function findTransportHandler(req, res, id) {
       return transArray;
     })
     .catch(error => {
-      // console.log('inside superagent');
-      // console.log('Error in getting data from hotels server');
+      //console.log('Error in getting data from Google Books server')
       console.error(error);
-      //res.send(error);
+      res.render('pages/errors', { errors: error });
     });
   // console.log('after superagent');
 }
@@ -368,6 +377,11 @@ console.log('request query --------------------------------',req.query);
   Client.query(SQL, safeValues)
     .then(data => {
       res.redirect('/allSavedData');
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
     });
 }
 
@@ -377,6 +391,11 @@ function allSavedDataHandler(req, res) {
     .then(data => {
       console.log('selectdata', data.rows);
       res.render('pages/saved', { bookingData: data.rows });
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
     });
 }
 
@@ -384,7 +403,12 @@ function deletePlanHandler(req, res) {
   let SQL = `DELETE FROM booking WHERE id=$1;`;
   let value = [req.params.planID];
   Client.query(SQL, value)
-    .then(res.redirect(`/allSavedData`));
+    .then(res.redirect('/'))
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
+    });
   // res.render(`pages/saved`,{obj:safeValues});
 
 }
@@ -397,6 +421,11 @@ function showPlanDetails(req, res) {
     .then((result) => {
       console.log('showPlanDetails', result.rows[0]);
       res.render('pages/details', { plan: result.rows[0] });
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
     });
 }
 
@@ -411,11 +440,13 @@ function updatePlanHandler(req, res) {
       console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
       // res.redirect(`/`);
       // res.render(`pages/saved`,{obj:safeValues});
-      res.redirect(`/details/${id}`);
 
-
-    }).catch(error => {
-      res.send(error);
+      res.redirect(`/details/${req.params.planID}`);
+    })
+    .catch(error => {
+      //console.log('Error in getting data from Google Books server')
+      console.error(error);
+      res.render('pages/errors', { errors: error });
     });
 
 }
@@ -513,7 +544,7 @@ function Transport(transData) {
 
 
 // unfound route
-app.get('*', (req, res) => res.status(404).send('This route does not exist'));
+app.get('*', (req, res) => res.status(404).render('pages/error'));
 
 
 //listen
