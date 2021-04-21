@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/reset.css" />
-    <!-- <link rel="stylesheet" href="styles/base.css" /> -->
+    <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/saved.css">
-    <!-- <link rel="stylesheet" href="styles/result.css"> -->
     <title>BuddyNav</title>
   </head>
 
@@ -16,6 +15,16 @@
   </div>
 
   <body>
+    <div class="pure-menu pure-menu-horizontal">
+      <img id="logo" class="pure-menu-heading" src="Images/Buddy Nav-01.png" alt="">
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+          <li class="pure-menu-item pure-menu-selected"><a href="/allSavedData" class="pure-menu-link">Your Plans</a></li>
+          <li class="pure-menu-item"><a href="about-us.html" class="pure-menu-link">About Us</a></li>
+      </ul>
+  </div>
+  
+
     <% console.log('mostafa',bookingData) %> 
     <% bookingData.forEach(element => { %>
       
@@ -47,5 +56,9 @@
           </div>
 
           <%  });  %> 
+
+          <div class="footer l-box is-center">
+            BuddyNav&copy;2021 Powered by Strangers group
+        </div>
   </body>
 </html>
