@@ -132,7 +132,7 @@ a.pure-button-primary {
 */
 
 .splash-container {
-  background:url(../../public/Images/airplane1.gif) no-repeat;
+  background:url(/Images/airplane1.gif) no-repeat;
   background-size: 100% 30em;
   z-index: 1;
   overflow: hidden;
