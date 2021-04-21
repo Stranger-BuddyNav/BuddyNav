@@ -5,24 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <title>Plans</title>
+    <!-- <link rel="stylesheet" href="styles/base.css" /> -->
+    <link rel="stylesheet" href="styles/saved.css">
+    <!-- <link rel="stylesheet" href="styles/result.css"> -->
+    <title>BuddyNav</title>
   </head>
-  <body>
-    <% console.log(bookingData) %> 
-    <% bookingData.forEach(element => { %>
-        <div>
-            <img src="<%= element.map_url %>" alt="Image" />
-            <h2><%= element.city %></h2>
-            <p><%= element.id %></p>
-            </div>
-            <form action="/details/<%=element.id%>" method="GET">
-                <button>Edit Plan</button>
-             </form>
-  <%  });  %> 
 
-   
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/js/app.js"></script>
+<div id="gif-div">
+  <img src="/Images/trvel2.gif" alt="" />
+  </div>
+
+  <body>
+    <% console.log('mostafa',bookingData) %> 
+    <% bookingData.forEach(element => { %>
+      
+        <div class="saveData">
+          <div class="static-image">
+          <img src="<%= element.city_url %>" alt="Image" />
+        </div>
+        <div class="card">
+            <img class="imgCard" src="<%= element.hotel_img %>" alt="Image" />
+            <h2 class="title"><%= element.hotel_name %></h2> 
+            <div class="description">
+            <h2> Hotel Price  : <%= element.hotel_price %></h2>
+            <h2> Hotel Rate : <%= element.hotel_rate %></h2>
+            <h2> Staion Name : <%= element.station_name %></h2>
+            <h2> Staion Type : <%= element.station_type %></h2>
+            <h2> Transport Price : <%= element.transport_price %></h2>
+          </div>
+            
+            <form action="/details/<%=element.id%>" method="POST">
+              <button class="cta">
+                <span> Edit Plan</span>
+                <svg width="13px" height="10px" viewBox="0 0 13 10">
+                  <path d="M1,5 L11,5"></path>
+                  <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+              </button>
+              </form>
+            </div>
+          </div>
+
+          <%  });  %> 
   </body>
 </html>
