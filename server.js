@@ -369,9 +369,9 @@ function covidHandler(req) {
 // DataBase Functions
 
 function saveDataHandler(req, res) {
-console.log('request query --------------------------------',req.query);
+  console.log('request query --------------------------------', req.query);
   let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price } = req.query;
-  console.log('city_name',city);
+  console.log('city_name', city);
   let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
   let safeValues = [city, map_url, city_url, time, hotel_name[1], hotel_price, hotel_rate, hotel_img, station_name[1], station_type, transport_price];
   Client.query(SQL, safeValues)
@@ -430,11 +430,11 @@ function showPlanDetails(req, res) {
 }
 
 function updatePlanHandler(req, res) {
-  console.log('req.body -----------------------',req.body);
-  let { city, time, hotel_name, station_name, station_type,id } = req.body;
+  console.log('req.body -----------------------', req.body);
+  let { city, time, hotel_name, station_name, station_type, id } = req.body;
   let SQL = `UPDATE booking SET city=$1,time=$2,hotel_name=$3,station_name=$4,station_type=$5 WHERE id=$6;`;
-  let safeValues = [city, time, hotel_name, station_name, station_type,id];
-  console.log('sssssssssssssssssssssssssssssssss',safeValues);
+  let safeValues = [city, time, hotel_name, station_name, station_type, id];
+  console.log('sssssssssssssssssssssssssssssssss', safeValues);
   Client.query(SQL, safeValues)
     .then(() => {
       console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');

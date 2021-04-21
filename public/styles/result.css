@@ -164,6 +164,7 @@ section {
   .light {
     --primary: hsl(250, 100%, 44%);
     --other: hsl(0, 0%, 14%);
+    margin: 10px 0;
   
     background: hsl(0, 0%, 98%);
   }
@@ -406,6 +407,7 @@ end button css
 .pricing-tables {
     margin-bottom: 3.125em;
     text-align: center;
+
 }
 
 /*
@@ -417,6 +419,7 @@ end button css
     box-shadow: 5px 10px 18px #888888;
     margin: 0 0.5em 2em;
     /* padding: 0 0 3em; */
+    border-radius: 5%;
         
 }
 
@@ -449,8 +452,8 @@ end button css
  * By default, a header is black/white, and has some styles for its <h2> name.
  */
 .pricing-table-header {
-    background: #111;
-    
+    background: #2d3e50;;
+    border-radius: 3%;
     /* color: #fff; */
     width: 250px;
     height: 100px;
@@ -473,6 +476,7 @@ end button css
     font-size: 2em;
     margin: 0.2em 0 0;
     font-weight: 100;
+    color: #b3aaaa;
 }
     .pricing-table-price span {
         display: block;
@@ -607,4 +611,8 @@ span.width {
     .banner-head {
         font-size: 3em;
     }
+}
+
+.div{
+  box-shadow: #cecbcb 2px 2px 2px 2px;
 }
