@@ -40,6 +40,9 @@ ul {
     white-space: nowrap;
     position: relative;
     z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .pure-menu-selected>.pure-menu-link, .pure-menu-selected>.pure-menu-link:visited {
