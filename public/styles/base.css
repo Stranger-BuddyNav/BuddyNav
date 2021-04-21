@@ -231,8 +231,15 @@ a.pure-button-primary {
 }
 
 #searchForm{
+  border: 1.5px solid blue;
+  display:inline-block;
+  margin-left: 35%;
+  margin-bottom: 1em; 
+  padding: 2em;
   text-align: center;
-  /* background-color: #ggg; */
+  border-radius: 1em;
+  box-shadow: gray .5em .5em .5em;
+  
 }
 #searchForm input{
   width: 20em
