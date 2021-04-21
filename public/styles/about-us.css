@@ -11,7 +11,6 @@
 
 .container {
   margin: auto;
-  padding: 2em 0;
   display: grid;
   grid-template-columns: 18.5em 18.5em 18.5em;
   grid-gap: 9em;
