@@ -35,7 +35,8 @@ app.get('/search', allApiHandler);
 //DataBase Route
 app.get('/saveData', saveDataHandler);
 app.get('/allSavedData', allSavedDataHandler);
-app.post('/details/:PlanID', showPlanDetails);
+// app.post('/details/:PlanID', showPlanDetails);
+app.get('/details/:PlanID', showPlanDetails);
 app.put('/updatePlan/:planID', updatePlanHandler);
 app.delete('/deletePlan/:planID', deletePlanHandler);
 
@@ -359,10 +360,11 @@ function covidHandler(req) {
 // DataBase Functions
 
 function saveDataHandler(req, res) {
-
+console.log('request query --------------------------------',req.query);
   let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price } = req.query;
+  console.log('city_name',city);
   let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-  let safeValues = [city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price];
+  let safeValues = [city, map_url, city_url, time, hotel_name[1], hotel_price, hotel_rate, hotel_img, station_name[1], station_type, transport_price];
   Client.query(SQL, safeValues)
     .then(data => {
       res.redirect('/allSavedData');
@@ -373,6 +375,7 @@ function allSavedDataHandler(req, res) {
   let SQL = 'SELECT * FROM booking;';
   Client.query(SQL)
     .then(data => {
+      console.log('selectdata', data.rows);
       res.render('pages/saved', { bookingData: data.rows });
     });
 }
@@ -381,31 +384,34 @@ function deletePlanHandler(req, res) {
   let SQL = `DELETE FROM booking WHERE id=$1;`;
   let value = [req.params.planID];
   Client.query(SQL, value)
-    .then(res.redirect('/'));
+    .then(res.redirect(`/allSavedData`));
   // res.render(`pages/saved`,{obj:safeValues});
 
 }
 
 function showPlanDetails(req, res) {
   let SQL = `SELECT * FROM booking WHERE id=$1;`;
+  // console.log('request',req.query,req.params.PlanID);
   let value = [req.params.PlanID];
   Client.query(SQL, value)
     .then((result) => {
+      console.log('showPlanDetails', result.rows[0]);
       res.render('pages/details', { plan: result.rows[0] });
     });
 }
 
 function updatePlanHandler(req, res) {
-  // console.log(req.params.PlanID);
-  let { city, image_url, date, hotel, transport } = req.body;
-  let SQL = `UPDATE booking SET city=$1,image_url=$2,date=$3,hotel=$4,transport=$5 WHERE id=$6;`;
-  let safeValues = [city, image_url, date, hotel, transport, req.params.PlanID];
+  console.log('req.body -----------------------',req.body);
+  let { city, time, hotel_name, station_name, station_type,id } = req.body;
+  let SQL = `UPDATE booking SET city=$1,time=$2,hotel_name=$3,station_name=$4,station_type=$5 WHERE id=$6;`;
+  let safeValues = [city, time, hotel_name, station_name, station_type,id];
+  console.log('sssssssssssssssssssssssssssssssss',safeValues);
   Client.query(SQL, safeValues)
     .then(() => {
-      res.redirect(`/`);
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+      // res.redirect(`/`);
       // res.render(`pages/saved`,{obj:safeValues});
-      res.redirect(`/details/${req.params.planID}`);
-
+      res.redirect(`/details/${id}`);
 
 
     }).catch(error => {
