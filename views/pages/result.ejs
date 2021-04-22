@@ -68,11 +68,6 @@
         </section>
     </div>
     <!-- end l-content -->
-    <form action="/saveData" method="get" class="form">
-        <input type="hidden" name="cityName" value="<%= apiAll[3].cityName  %>">
-        <input type="hidden" name="map_url" value="<%= apiAll[0].map_url %>">
-        <input type="hidden" name="city_url" value="<%= apiAll[0].city_url %>">
-        <input type="hidden" name="time" value="<%= apiAll[3].time %>">
         <section class="light">
             <h1> HOTELS </h1>
             <div class="grid1">
@@ -113,6 +108,7 @@
                         <span class="design"></span>
                         <span class="text"></span>
                         <%= element.station_name %>
+                            <input type="hidden" name='station_name_<%=count1%>' value="<%=element.station_name %>">    
                             <input type="hidden" name='station_type_<%=count1%>' value="<%=element.station_type %>">
                             <input type="hidden" name='transport_price_<%=count1%>' value="<%=element.transport_price%>">
                     </label>
@@ -125,6 +121,8 @@
                     <% }); %>
             </div>
         </section>
+        <section id="finalTemplate">
+        </section>
         <!-- <button class="cta">
             <span> Save Plan</span>
             <svg width="13px" height="10px" viewBox="0 0 13 10">
@@ -133,7 +131,6 @@
             </svg>
         </button> -->
         <!-- <button class="btn">Save plane</button> -->
-    </form>
     <div class="l-content">
         <section class="dark">
             <h1>COVID-19</h1>
@@ -226,12 +223,12 @@
                 stationPrice:transportPrice,
                 stationType:stationType,
             }
-            // console.log(stationObj);
+            console.log('aaaaaaaa2',Obj[1]);
+            const allData = Object.assign({}, ...Obj);
             let template = $('#hotel-template').html(); // $('#neighborhood-template').html();
             // let v = {data:Obj};
-            const allData = Object.assign({}, ...Obj);
             let newHotelTemplate = Mustache.render(template, allData);
-            // console.log('aaaaaaaa2',v['data'][0].hotelName);
+         
             $('#finalTemplate').append(newHotelTemplate);
         })
         console.log('3333333333333333',Obj);
@@ -247,11 +244,9 @@
             <input type="hidden" name='hotel_price' value={{hotelPrice}}>
             <input type="hidden" name='hotel_rate' value={{hotelRate}}>
             <input type="hidden" name='hotel_image' value={{hotelImg}}>
-    
             <input type="hidden" name='station_name' value={{stationName}}>
             <input type="hidden" name='transport_price' value={{stationPrice}}>
             <input type="hidden" name='station_type' value={{stationType}}>
-    
             <button class="cta">
                 <span> Save Plan</span>
                 <svg width="13px" height="10px" viewBox="0 0 13 10">
