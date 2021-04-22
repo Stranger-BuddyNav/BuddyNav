@@ -45,7 +45,6 @@ app.delete('/deletePlan/:planID', deletePlanHandler);
 function allApiHandler(req, res) {
   let appAPiArr = [];
 
-
   // console.log('allApiHandler');
   // console.log(req.query);
   let SQL = 'SELECT id FROM city WHERE city =$1;';
@@ -369,11 +368,11 @@ function covidHandler(req) {
 // DataBase Functions
 
 function saveDataHandler(req, res) {
-  console.log('request query --------------------------------', req.query);
-  let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price } = req.query;
+  console.log('request query --------------------------------', req.query.hotel);
+  let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type } = req.query;
   console.log('city_name', city);
-  let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, station_type, transport_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-  let safeValues = [city, map_url, city_url, time, hotel_name[1], hotel_price, hotel_rate, hotel_img, station_name[1], station_type, transport_price];
+  let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+  let safeValues = [city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type];
   Client.query(SQL, safeValues)
     .then(data => {
       res.redirect('/allSavedData');
@@ -420,7 +419,7 @@ function showPlanDetails(req, res) {
   Client.query(SQL, value)
     .then((result) => {
       console.log('showPlanDetails', result.rows[0]);
-      res.render('pages/details', { plan: result.rows[0] });
+      res.render('pages/test', { plan: result.rows[0] });
     })
     .catch(error => {
       //console.log('Error in getting data from Google Books server')

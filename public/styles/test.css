@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:700|Noticia+Text:400i&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  perspective: 1100px;
+}
+.c {
+  display: none;
+}
+
+#v {
+    z-index: -5; 
+    width: 100%;
+    height:900px ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+}
+
+
+article {
+  /* limit the width of the article container */
+  width: 550px;
+  /* display the contents in a column */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: hsl(0, 0%, 100%);
+  line-height: 2;
+  border-radius: 10px;
+  margin: 0.5rem;
+  /* transition for the transform property, updated in the script */
+  transition: transform 0.2s ease-out;
+  filter: drop-shadow(8px 8px 10px black);
+  margin: auto;
+  margin-top: -811px;
+}
+article figure {
+  /* limit the width and height of the figure to show the image in a circle */
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  /* specify negative margin matching half the height of the element */
+  margin-top: -60px;
+  /* position relative for the pseudo element */
+  position: relative;
+}
+article figure:before {
+  /* add a border around the figure matching the color of the background, faking the clip */
+  content: "";
+  border-radius: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border: 1rem solid hsl(250, 85%, 97%);
+  box-shadow: 0 1px hsla(0, 0%, 0%, 0.1);
+}
+article figure img {
+  /* stretch the image to cover the size of the wrapping container */
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  /* object fit to maintain the aspect ratio and fit the width/height */
+  object-fit: cover;
+}
+
+article div {
+  /* center the text in the div container */
+  text-align: center;
+  margin: 2rem;
+}
+article div p {
+  color: hsl(250, 5%, 45%);
+  font-weight: 400;
+  font-style: italic;
+  margin: 1rem 0 3rem;
+  font-family: "Noticia Text", serif;
+  /* position relative for the pseudo element */
+  position: relative;
+  z-index: 5;
+}
+article div p:before {
+  /* with SVG elements include two icons for the quote */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: -5;
+  opacity: 0.05;
+  /* position the icons at either end of the paragraph, rotate the second to have a mirrorer image */
+  /* background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="70" height="70"><rect x="0" y="40" width="30" height="30"></rect><path d="M 0 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path><rect x="40" y="40" width="30" height="30"></rect><path d="M 40 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="70" height="70" transform="rotate(180)"><rect x="0" y="40" width="30" height="30"></rect><path d="M 0 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path><rect x="40" y="40" width="30" height="30"></rect><path d="M 40 40 q 0 -40 30 -40 v 15 q -15 0 -15 25"></path></svg>'); */
+  background-position: 20% 20%, 80% 80%;
+  background-repeat: no-repeat;
+}
+article div h1 {
+  /* considerably reduce the size of the heading */
+  color: hsl(260, 5%, 55%);
+  font-family: "Lato", sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+header {
+  margin-bottom: 140px;
+}
+
+footer {
+  clear: both;
+  margin-top: 250px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  /*   padding: 2em 0em; */
+}
+.btn {
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 45px;
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 50px;
+  margin-left: 600px;
+}
+.btn:hover {
+  text-decoration: none;
+}
+/*btn_background*/
+.effect04 {
+  --uismLinkDisplay: var(--smLinkDisplay, inline-flex);
+  display: var(--uismLinkDisplay);
+  color: #000;
+  outline: solid 2px #000;
+  position: relative;
+  transition-duration: 0.4s;
+  overflow: hidden;
+}
+.effect04::before,
+.effect04 span {
+  margin: 0 auto;
+  transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  transition-duration: 0.4s;
+}
+/* 文字1を上に */
+.effect04:hover {
+  background-color: #000;
+}
+/* HOVERしたら文字1を上に */
+.effect04:hover span {
+  -webkit-transform: translateY(-400%) scale(-0.1, 20);
+  transform: translateY(-400%) scale(-0.1, 20);
+}
+/*文字2*/
+.effect04::before {
+  content: attr(data-sm-link-text);
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-transform: translateY(500%) scale(-0.1, 20);
+  transform: translateY(500%) scale(-0.1, 20);
+}
+/* HOVERしたら文字2を上に */
+.effect04:hover::before {
+  letter-spacing: 0.05em;
+  -webkit-transform: translateY(0) scale(1, 1);
+  transform: translateY(0) scale(1, 1);
+}
+
+/* 
+form{
+  
+  
+} */
+input {
+  margin-top: 30px;
+  margin-left: 500px;
+  font-size: 20px;
+  width: 360px;
+  text-align: center;
+}
+
+input[type="text"] {
+  /* width: 60%; */
+  padding: 12px 0px;
+  /* margin: 8px 0; */
+
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/* input {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} */
