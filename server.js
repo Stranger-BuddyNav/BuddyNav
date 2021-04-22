@@ -368,11 +368,12 @@ function covidHandler(req) {
 // DataBase Functions
 
 function saveDataHandler(req, res) {
-  console.log('request query --------------------------------', req.query.hotel);
-  let { city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type } = req.query;
-  console.log('city_name', city);
+  console.log('request query --------------------------------', req.query);
+  let { cityName, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_image, station_name, transport_price, station_type } = req.query;
+  console.log('city_name', cityName);
   let SQL = `INSERT INTO booking (city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-  let safeValues = [city, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_img, station_name, transport_price, station_type];
+  let safeValues = [cityName, map_url, city_url, time, hotel_name, hotel_price, hotel_rate, hotel_image, station_name, transport_price, station_type];
+  console.log('************************', safeValues);
   Client.query(SQL, safeValues)
     .then(data => {
       res.redirect('/allSavedData');
