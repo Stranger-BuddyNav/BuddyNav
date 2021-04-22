@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/saved.css">
+    <link rel="stylesheet" href="styles/header2.css">
+    <link rel="icon" href="Images/Buddy-Nav-icon.png">
+    <title>Your Plans</title>
+  </head>
+
+<!-- <div id="gif-div">
+  <img src="/Images/trvel2.gif" alt="" />
+  </div> -->
+
+  <body>
+    <div class="pure-menu pure-menu-horizontal">
+      <img id="logo" class="pure-menu-heading" src="Images/Buddy Nav-01 vs2.png" alt="">
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+          <li class="pure-menu-item pure-menu-selected"><a href="/allSavedData" class="pure-menu-link">Your Plans</a></li>
+          <li class="pure-menu-item"><a href="../about-us.html" class="pure-menu-link">About Us</a></li>
+      </ul>
+  </div>
+  
+
+    <% console.log('mostafa',bookingData) %> 
+    <% bookingData.forEach(element => { %>
+      
+        <div class="saveData">
+          <div class="static-image">
+          <img src="<%= element.city_url %>" alt="Image" />
+        </div>
+        <div class="card">
+            <img class="imgCard" src="<%= element.hotel_img %>" alt="Image" />
+            <h2 class="title"><%= element.hotel_name %></h2> 
+            <div class="description">
+            <h2> Hotel Price  : <%= element.hotel_price %></h2>
+            <h2> Hotel Rate : <%= element.hotel_rate %></h2>
+            <h2> Staion Name : <%= element.station_name %></h2>
+            <h2> Staion Type : <%= element.station_type %></h2>
+            <h2> Transport Price : <%= element.transport_price %></h2>
+          </div>
+            
+            <form action="/details/<%=element.id%>" method="GET">
+              <button class="cta">
+                <span> Edit Plan</span>
+                <svg width="13px" height="10px" viewBox="0 0 13 10">
+                  <path d="M1,5 L11,5"></path>
+                  <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+              </button>
+              </form>
+            </div>
+          </div>
+
+          <%  });  %> 
+
+          <div class="footer l-box is-center">
+            BuddyNav&copy;2021 Powered by Strangers group
+        </div>
+  </body>
+</html>

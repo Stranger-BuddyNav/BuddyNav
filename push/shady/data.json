@@ -1,0 +1,91 @@
+[
+    {
+      geoId: '5526094',
+      destinationId: '719635',
+      landmarkCityDestinationId: null,
+      type: 'AIRPORT',
+      redirectPage: 'DEFAULT_PAGE',
+      latitude: 35.773258,
+      longitude: 140.388451,
+      caption: "<span class='highlighted'>Tokyo</span>, Japan (NRT-Narita Intl.)",
+      name: 'Tokyo (NRT-Narita Intl.)'
+    },
+    {
+      geoId: '4476488',
+      destinationId: '1645880',
+      landmarkCityDestinationId: null,
+      type: 'AIRPORT',
+      redirectPage: 'DEFAULT_PAGE',
+      latitude: 35.549477,
+      longitude: 139.785104,
+      caption: "<span class='highlighted'>Tokyo</span>, Japan (HND-Haneda)",
+      name: 'Tokyo (HND-Haneda)'
+    },
+    {
+      geoId: '6177827',
+      destinationId: '1726082',
+      landmarkCityDestinationId: null,
+      type: 'METRO_STATION',
+      redirectPage: 'DEFAULT_PAGE',
+      latitude: 35.54436,
+      longitude: 139.76787,
+      caption: "Haneda Airport International Terminal Station, <span class='highlighted'>Tokyo</span>, Tokyo (prefecture), Japan",
+      name: 'Haneda Airport International Terminal Station'
+    }
+  ]
+
+  {
+    country: 'Japan',
+    population: 127484450,
+    confirmed: 536314,
+    recovered: 480637,
+    deaths: 9616,
+    updated: undefined
+  }
+
+  [
+    {
+      geoId: '22597',
+      destinationId: '235252',
+      landmarkCityDestinationId: null,
+      type: 'HOTEL',
+      redirectPage: 'DEFAULT_PAGE',
+      latitude: 35.69226,
+      longitude: 139.69159,
+      caption: "Hilton <span class='highlighted'>Tokyo</span>, Tokyo, Tokyo (prefecture), Japan",
+      name: 'Hilton Tokyo'
+    },
+    {
+      geoId: '969939',
+      destinationId: '108657',
+      landmarkCityDestinationId: null,
+      type: 'HOTEL',
+      redirectPage: 'DEFAULT_PAGE',
+      latitude: 35.686738,
+      longitude: 139.690419,
+      caption: "Park Hyatt <span class='highlighted'>Tokyo</span>, Tokyo, Tokyo (prefecture), Japan",
+      name: 'Park Hyatt Tokyo'
+    }
+  ]
+  [
+    Hotel {
+      name: 'Hilton Tokyo',
+      imageLinks: 'https://pixabay.com/get/gdb7bf6e64f97d1b1383c1157f5b1fd327f56c48706ce06816b463c7aa4c7c3083a695cd5833e1dc96e075c53ebf29c3bbea4644876748f6ddac30dc518842b6e_640.jpg',
+      rate: 4,
+      price: 58
+    },
+    Hotel {
+      name: 'Park Hyatt Tokyo',
+      imageLinks: 'https://thumbs.dreamstime.com/b/find-hotel-search-hotels-concept-smartphone-maps-gps-location-building-team-people-modern-flat-style-vector-147792003.jpg',
+      rate: 1,
+      price: 214
+    }
+  ]
+  [
+    Hotel {
+      name: 'Hilton Tokyo',
+      imageLinks: 'https://pixabay.com/get/gdb7bf6e64f97d1b1383c1157f5b1fd327f56c48706ce06816b463c7aa4c7c3083a695cd5833e1dc96e075c53ebf29c3bbea4644876748f6ddac30dc518842b6e_640.jpg',
+      rate: 4,
+      price: 58
+    }
+  ]

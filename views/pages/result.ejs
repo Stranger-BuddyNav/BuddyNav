@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a responsive pricing table.">
+    <link rel="stylesheet" href="styles/pure-min.css">
+    <link rel="stylesheet" href="styles/grids-responsive-min.css">
+    <link rel="stylesheet" href="styles/result.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="Images/Buddy-Nav-icon.png">
+    <title><%= apiAll[3].cityName %> City</title>
+</head>
+<body>
+    <div class="pure-menu pure-menu-horizontal bg">
+        <img id="logo" class="pure-menu-heading" src="Images/Buddy Nav-01 vs2.png" alt="">
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item pure-menu-selected"><a href="/allSavedData" class="pure-menu-link">Your Plans</a></li>
+            <li class="pure-menu-item"><a href="about-us.html" class="pure-menu-link">About Us</a></li>
+        </ul>
+    </div>
+    <div class="banner">
+        <h2 id="cityHeader" class="dark"
+            style="display: inline-block; padding: 10px 30px; letter-spacing: normal;color: white; font-size: 40px; ">
+            <%= apiAll[3].cityName %>
+                </h2> <br>
+                <% console.log(apiAll) %>
+                    <img src="<%= apiAll[0].city_url %> " alt="" id="city"> <br>
+    </div>
+    <div class="l-content">
+        <section class="dark">
+            <br>
+            <h1>WEATHER</h1>
+            <div class="pricing-tables pure-g">
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-free">
+                        <div class="pricing-table-header">
+                            <h2></h2>
+                            <span class="pricing-table-price" style="font-weight: bolder;">
+                                <%= apiAll[3].temperature %> °C <span> </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-biz pricing-table-selected">
+                        <div class="pricing-table-header">
+                            <h2> </h2>
+                            <span class="pricing-table-price">
+                                <img src=" <%= apiAll[3].weather_icons %> " alt="" class="imagIcon"> <span> </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-enterprise">
+                        <div class="pricing-table-header">
+                            <h2></h2>
+                            <span class="pricing-table-price width weatherDes">
+                                <%= apiAll[3].weather_descriptions %>
+                                    <span> </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div> <br> <br>
+        </section>
+    </div>
+    <!-- end l-content -->
+    <form action="/saveData" method="get" class="form">
+        <input type="hidden" name="cityName" value="<%= apiAll[3].cityName  %>">
+        <input type="hidden" name="map_url" value="<%= apiAll[0].map_url %>">
+        <input type="hidden" name="city_url" value="<%= apiAll[0].city_url %>">
+        <input type="hidden" name="time" value="<%= apiAll[3].time %>">
+        <section class="light">
+            <h1> HOTELS </h1>
+            <div class="grid1">
+                <% let count=0; %>
+                <% apiAll[1].forEach(element=> {%>
+                    <% count++ %>
+                    <div class="div">
+                        <h5>
+                            <%= element.hotel_name %>
+                        </h5>
+                        <img src="<%= element.hotel_image %>" class="imagehotel" alt="Hotel">
+                        <p>Rating: <%= element.hotel_rate %> stars</p>
+                        <p>Price: $<%= element.hotel_price %></p>
+                        <label>
+                            <input type="radio" name="hotel" value="<%=count%>%>" >
+                            <span class="design"></span>
+                            <span class="text"></span>
+                            Select Hotel
+                            <input type="hidden" name='hotel_name_<%=count%>'value=" <%= element.hotel_name %>" checked>
+                            <input type="hidden" name=hotel_price_<%=count%> value="<%= element.hotel_price%>">
+                            <input type="hidden" name=hotel_rate_<%=count%> value="<%=element.hotel_rate %>">
+                            <input type="hidden" name=hotel_img_<%=count%> value="<%=element.hotel_image %>">
+                        </label>
+                        
+                    </div>
+                    <% }); %>
+            </div>
+        </section>
+        <section class="light">
+            <h1> TRANSPORT </h1>
+            <div class="grid1 transport">
+                <% let count1=0; %>
+                <% apiAll[2].forEach(element=> {%>
+                    <% count1++ %>
+                    <!-- <div> -->
+                    <label class="transportLabel">
+                        <input type="radio" name="station" value="<%=count1%>" >
+                        <span class="design"></span>
+                        <span class="text"></span>
+                        <%= element.station_name %>
+                            <input type="hidden" name='station_type_<%=count1%>' value="<%=element.station_type %>">
+                            <input type="hidden" name='transport_price_<%=count1%>' value="<%=element.transport_price%>">
+                    </label>
+                    <p>
+                        <%= element.station_type %>
+                    </p>
+                    <p>Price: $<%= element.transport_price %>
+                    </p>
+                    <!-- </div>  -->
+                    <% }); %>
+            </div>
+        </section>
+        <!-- <button class="cta">
+            <span> Save Plan</span>
+            <svg width="13px" height="10px" viewBox="0 0 13 10">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+            </svg>
+        </button> -->
+        <!-- <button class="btn">Save plane</button> -->
+    </form>
+    <div class="l-content">
+        <section class="dark">
+            <h1>COVID-19</h1>
+            <h2 class="title">
+                <%= apiAll[4].country %> population: <%= apiAll[4].population %>
+            </h2>
+            <div class="pricing-tables pure-g">
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-free">
+                        <div class="pricing-table-header">
+                            <h2 style="color: #b3aaaa;">confirmed</h2>
+                            <span class="pricing-table-price">
+                                <%= apiAll[4].confirmed %> <span> </span>
+                            </span>
+                        </div>
+                        <ul class="pricing-table-list">
+                            <li>last update <%= apiAll[3].time %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-biz pricing-table-selected">
+                        <div class="pricing-table-header">
+                            <h2 style="color: #b3aaaa;"> recovered</h2>
+                            <span class="pricing-table-price">
+                                <%= apiAll[4].recovered %> <span> </span>
+                            </span>
+                            <ul class="pricing-table-list">
+                                <li class="ahmad">last update <%= apiAll[3].time %>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-3">
+                    <div class="pricing-table pricing-table-enterprise">
+                        <div class="pricing-table-header">
+                            <h2 style="color: #b3aaaa;">deaths</h2>
+                            <span class="pricing-table-price">
+                                <%= apiAll[4].deaths %> <span> </span>
+                            </span>
+                        </div>
+                        <ul class="pricing-table-list">
+                            <li>last update <%= apiAll[3].time %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </section>
+    </div> <!-- end pricing-tables -->
+    <div class="grid">
+        <!-- <img src="Images/pexels-photo-207962.jpeg" alt=""> -->
+        <img src="<%=apiAll[0].map_url  %> " alt="" id="map">
+        <!-- <img src="Images/restaurant-beans-coffee-cup.jpg" alt=""> -->
+    </div>
+    <div class="footer l-box is-center">
+        BuddyNav&copy;2021 Powered by Strangers group
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let Obj=[];
+        // let Obj1,Obj0;
+        $('input[name=hotel]').on('click', function () {
+            let hotelNo = $(this).val();
+            console.log(hotelNo);
+            let hotelName = $(`input[name=hotel_name_${hotelNo}]`).val();
+            let hotelPrice = $(`input[name=hotel_price_${hotelNo}]`).val();
+            let hotelRate = $(`input[name=hotel_rate_${hotelNo}]`).val();
+            let hotelImg = $(`input[name=hotel_img_${hotelNo}]`).val();
+            // console.log(hotelName);
+            Obj[0]= {
+                hotelName:hotelName,
+                hotelPrice:hotelPrice,
+                hotelRate:hotelRate,
+                hotelImg:hotelImg
+            }
+            console.log('aaaaaaaa',Obj);
+        })
+        $('input[name=station]').on('click', function () {
+            //object
+            let stationNo = $(this).val();
+            console.log(stationNo);
+            let stationName = $(`input[name=station_name_${stationNo}]`).val();
+            let transportPrice = $(`input[name=transport_price_${stationNo}]`).val();
+            let stationType = $(`input[name=station_type_${stationNo}]`).val();
+            // console.log(stationName);
+            Obj[1] = {
+                stationName:stationName,
+                stationPrice:transportPrice,
+                stationType:stationType,
+            }
+            // console.log(stationObj);
+            let template = $('#hotel-template').html(); // $('#neighborhood-template').html();
+            // let v = {data:Obj};
+            const allData = Object.assign({}, ...Obj);
+            let newHotelTemplate = Mustache.render(template, allData);
+            // console.log('aaaaaaaa2',v['data'][0].hotelName);
+            $('#finalTemplate').append(newHotelTemplate);
+        })
+        console.log('3333333333333333',Obj);
+    </script>
+    <script id="hotel-template" type="text/x-tmpl-mustache">
+
+        <form  action="/saveData" method="get" class="form">
+            <input type="hidden" name="cityName" value="<%= apiAll[3].cityName  %>">
+            <input type="hidden" name="map_url" value="<%= apiAll[0].map_url %>">
+            <input type="hidden" name="city_url" value="<%= apiAll[0].city_url %>">
+            <input type="hidden" name="time" value="<%= apiAll[3].time %>">
+            <input type="hidden" name='hotel_name' value={{hotelName}}>
+            <input type="hidden" name='hotel_price' value={{hotelPrice}}>
+            <input type="hidden" name='hotel_rate' value={{hotelRate}}>
+            <input type="hidden" name='hotel_image' value={{hotelImg}}>
+    
+            <input type="hidden" name='station_name' value={{stationName}}>
+            <input type="hidden" name='transport_price' value={{stationPrice}}>
+            <input type="hidden" name='station_type' value={{stationType}}>
+    
+            <button class="cta">
+                <span> Save Plan</span>
+                <svg width="13px" height="10px" viewBox="0 0 13 10">
+                    <path d="M1,5 L11,5"></path>
+                    <polyline points="8 1 12 5 8 9"></polyline>
+                </svg>
+            </button>
+        </form>
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+/*
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+body {
+  color: #526066;
+}
+
+h2,
+h3 {
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6em;
+}
+
+.h2 {
+  color: #b3aaaa;
+}
+
+/*
+* -- Layout Styles --
+*/
+.l-content {
+  margin: 0 auto;
+}
+
+.l-box {
+  padding: 0.5em 2em;
+}
+
+/*
+* -- MENU STYLES --
+* Make the menu have a very faint box-shadow.
+*/
+/* .pure-menu {
+  box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+}
+
+.pure-menu-link {
+  padding: .5em .7em;
+} */
+
+/*
+* -- BANNER --
+* The top banner with the headings. By using a combination
+* of `display: table;` and `display: table-cell;`, we can
+* vertically center the text.
+*/
+
+.banner {
+  /* background: transparent url('http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg') 0 0 no-repeat fixed; */
+  text-align: center;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://24.media.tumblr.com/ccb268832580ac12951828a1c179de69/tumblr_mo2xbk8JUK1st5lhmo1_1280.jpg', sizingMethod='scale');
+
+  height: 200px;
+  width: 100%;
+  margin-bottom: 3em;
+  display: table;
+}
+#city {
+  height: 600px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+h2.title1 {
+  display: inline-block;
+  background-color: floralwhite;
+  padding: 15px 95px;
+  letter-spacing: normal;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  background-image: url(https://i.makeagif.com/media/7-22-2017/j9kWHv.gif);
+  background-size: cover;
+}
+.grid img {
+  width: 430px;
+  height: 400px;
+  margin: auto;
+  padding: 10px 19px;
+  margin: 0px 20px;
+  opacity: 0.7;
+  border-radius: 150px 50px;
+}
+#map {
+  height: 400px;
+  margin: 0px 20px;
+}
+
+.imagIcon {
+  width: 4em;
+  height: 2.5em;
+  position: relative;
+  bottom: 0.7em;
+}
+
+.banner-head {
+  display: table-cell;
+  vertical-align: middle;
+  margin-bottom: 0;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgb(250, 206, 206);
+}
+
+.imagehotel {
+  width: 200px;
+  height: 200px;
+}
+
+/* hotel css  --- > */
+section {
+  width: 100%;
+  min-height: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: relative;
+}
+
+/* section::before,
+section::after {
+  content: "";
+  display: block;
+
+  border-radius: 100%;
+
+  position: absolute;
+} */
+
+section::before {
+  width: 30px;
+  height: 30px;
+
+  background: var(--primary);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+
+  top: 18px;
+  left: 18px;
+}
+
+section::after {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid var(--primary);
+
+  top: 11px;
+  left: 11px;
+}
+
+.light {
+  --primary: hsl(250, 100%, 44%);
+  --other: hsl(0, 0%, 14%);
+  margin: 10px 0;
+
+  background: hsl(0, 0%, 98%);
+}
+
+.dark {
+  --primary: hsl(1, 100%, 68%);
+  --other: hsl(0, 0%, 90%);
+
+  background: hsl(0, 0%, 10%);
+}
+
+/* h1 */
+h1 {
+  color: var(--other);
+  padding: 8px 4px;
+  border-bottom: 2px solid var(--other);
+}
+
+/* label */
+label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  margin: 12px 0;
+
+  cursor: pointer;
+  position: relative;
+  justify-content: center;
+}
+
+.transportLabel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  margin: 12px 0;
+
+  cursor: pointer;
+  position: relative;
+  justify-content: left;
+  padding: 0 1em;
+}
+
+/* input */
+input {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* .design */
+.design {
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid var(--other);
+  border-radius: 100%;
+  margin-right: 5px;
+
+  position: relative;
+}
+
+.design::before,
+.design::after {
+  content: "";
+  display: block;
+
+  width: inherit;
+  height: inherit;
+
+  border-radius: inherit;
+
+  position: absolute;
+  transform: scale(0);
+  transform-origin: center center;
+}
+
+.design:before {
+  background: var(--other);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.design::after {
+  background: var(--primary);
+  opacity: 0.4;
+  transition: 0.6s;
+}
+
+/* .text */
+.text {
+  color: var(--other);
+  font-weight: bold;
+}
+
+/* checked state */
+input:checked + .design::before {
+  opacity: 1;
+  transform: scale(0.6);
+}
+
+/* other states */
+input:hover + .design,
+input:focus + .design {
+  border: 1px solid var(--primary);
+}
+
+input:hover + .design:before,
+input:focus + .design:before {
+  background: var(--primary);
+}
+
+input:hover ~ .text {
+  color: var(--primary);
+}
+
+input:focus + .design::after,
+input:active + .design::after {
+  opacity: 0.1;
+  transform: scale(2.6);
+}
+
+.abs-site-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: hsla(0, 0%, 0%, 0.6);
+  background: hsla(0, 0%, 98%, 0.6);
+  font-size: 16px;
+}
+.grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
+  text-align: center;
+  gap: 10px;
+}
+.grid1 label {
+  text-align: center;
+  align-items: center;
+}
+
+.grid1 img {
+  width: 400px;
+  height: 200px;
+}
+.grid2 {
+  /*     
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* end hotel css */
+/*
+/* 
+/*
+start button css 
+*/
+
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+  border: none;
+  outline: 0;
+  text-decoration: none;
+  color: inherit;
+  margin: 25px;
+}
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: rgba(255, 171, 157, 0.5);
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
+}
+.cta span {
+  position: relative;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #111;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+.cta:hover:before {
+  width: 100%;
+  background: #ffab9d;
+}
+.cta:hover svg {
+  transform: translateX(0);
+}
+.cta:active {
+  transform: scale(0.96);
+}
+
+/* 
+end button css
+*/
+.form {
+  text-align: center;
+}
+
+/* -- PRICING TABLE WRAPPER --
+* This element wraps up all the pricing table elements
+*/
+.pricing-tables,
+.information {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.pricing-tables {
+  margin-bottom: 3.125em;
+  text-align: center;
+}
+
+/*
+* -- PRICING TABLE  --
+* Every pricing table has the .pricing-table class
+*/
+.pricing-table {
+  /* border: 1px solid #ddd; */
+  box-shadow: 5px 10px 18px #888888;
+  margin: 0 0.5em 2em;
+  /* padding: 0 0 3em; */
+  border-radius: 5%;
+}
+
+/*
+* -- PRICING TABLE HEADER COLORS --
+* Choose a different color based on the type of pricing table.
+*/
+.pricing-table-free {
+  /* background: #519251; */
+  background: gray;
+}
+
+.pricing-table-biz {
+  /* background: #2c4985; */
+  background: gray;
+
+  /* background-color: white; */
+}
+.pricing-table-enterprise {
+  background: gray;
+}
+
+/*
+* -- PRICING TABLE HEADER --
+* By default, a header is black/white, and has some styles for its <h2> name.
+*/
+.pricing-table-header {
+  background: #2d3e50;
+  border-radius: 3%;
+  /* color: #fff; */
+  width: 250px;
+  height: 100px;
+  /* color: #fff; */
+}
+.pricing-table-header h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+/*
+* -- PRICING TABLE PRICE --
+* Styles for the price and the corresponding <span>per month</span>
+*/
+.pricing-table-price {
+  font-size: 2em;
+  margin: 0.2em 0 0;
+  font-weight: 100;
+  color: #b3aaaa;
+}
+.pricing-table-price span {
+  display: block;
+  /* text-transform: uppercase; */
+  font-size: 0.2em;
+  padding-bottom: 2em;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.5);
+  *color: #fff;
+}
+
+/*
+* -- PRICING TABLE LIST --
+* Each pricing table has a <ul> which is denoted by the .pricing-table-list class
+*/
+.pricing-table-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  /* box-shadow: 5px 10px 18px #888888;
+  border: 1px solid var(--primary); */
+}
+
+/*
+* -- PRICING TABLE LIST ELEMENTS --
+* Styles for the individual list elements within each pricing table
+*/
+.pricing-table-list li {
+  padding: 0.8em 0;
+  background: #f7f7f7;
+  background: floralwhite;
+  /* border-bottom: 1px solid #e7e7e7; */
+
+  /* border-bottom: 1px solid #e7e7e7; */
+}
+.ahmad {
+  box-shadow: 5px 10px 18px #888888;
+}
+
+/*
+* -- PRICING TABLE BUTTON --
+* Styles for the "Choose" button at the bottom of a pricing table.
+* This inherits from Pure Button.
+*/
+/* .button-choose {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border-radius: 2em;
+  font-weight: bold;
+  position: relative;
+  bottom: -1.5em;
+} */
+
+.information-head {
+  color: black;
+  font-weight: 500;
+}
+
+.footer {
+  background: #111;
+  color: #888;
+  text-align: center;
+}
+.footer a {
+  color: #ddd;
+}
+
+/*
+* -- TABLET MEDIA QUERIES --
+* On tablets, we want to slightly adjust the size of the banner
+* text and add some vertical space between the various pricing tables
+*/
+
+.title {
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--other);
+  padding: 8px 4px;
+  /* border-bottom: 2px solid var(--other); */
+}
+
+span.width {
+  width: 200px;
+  height: 92.4px;
+}
+
+/* @import "header.css";
+#logo {
+width: 10em;
+height: 7em;
+} */
+
+.footer {
+  background: #111;
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  padding: 1.5em;
+  color: #7f8c8d;
+}
+@media (min-width: 767px) {
+  .banner-head {
+    font-size: 4em;
+  }
+  .pricing-table {
+    margin-bottom: 0;
+  }
+}
+
+/*
+* -- PHONE MEDIA QUERIES --
+* On phones, we want to reduce the height and font-size of the banner further
+*/
+@media (min-width: 480px) {
+  .banner {
+    height: 400px;
+  }
+  .banner-head {
+    font-size: 3em;
+  }
+}
+
+.div {
+  box-shadow: #cecbcb 2px 2px 2px 2px;
+}
+#cityHeader {
+  position: relative;
+  --primary: hsl(1, 100%, 68%);
+  --other: hsl(0, 0%, 90%);
+  background: hsl(0, 0%, 10%);
+  bottom: 3.4em;
+  box-shadow: gray.07em 0.07em 0.07em 0.07em;
+}
+.transport {
+  border: none;
+  border-radius: 0.7em;
+  width: 70%;
+  box-shadow: #cecbcb 0.2em 0.2em 0.2em 0.2em;
+}
+.weatherDes {
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 2em;
+}
