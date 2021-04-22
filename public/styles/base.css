@@ -231,19 +231,33 @@ a.pure-button-primary {
 }
 
 #searchForm{
-  border: 1.5px solid blue;
-  display:inline-block;
-  margin-left: 35%;
+  border: .18em solid #d8e3e7;
+  display:inline-flex;
+  position: relative;
+  left: 30%;
   margin-bottom: 1em; 
-  padding: 2em;
+  padding: 2em 4em;
   text-align: center;
   border-radius: 1em;
   box-shadow: gray .5em .5em .5em;
   
 }
 #searchForm input{
-  width: 20em
+  width: 20em;
+  height:3em;
+  text-align: center;
+  font-weight: bolder;
+  background-color: #51c4d38a;
+  color: black;
+  box-shadow: lightgray .4em .4em .4em;
+  border: none;
   }
+#searchForm h2{
+position: relative;
+bottom: 1.5em;
+font-weight: bolder;
+text-shadow: gray .05em .1em .2em;
+}
 .desImg{
  width: 50%;
   float:left;

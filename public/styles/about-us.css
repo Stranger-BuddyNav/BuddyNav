@@ -1,14 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500&display=swap");
-@import "header.css";
-.footer {
-  background: #111;
-  position: relative;
-  bottom: 0;
-  text-align: center;
-  padding: 1.5em;
-  color: #7f8c8d;
-}
-
+@import url("header2.css");
 .container {
   margin: auto;
   display: grid;
@@ -143,6 +134,11 @@ padding: 2px 2px;
 font-size: 27px;
 }
 
+#logo {
+  width: 4em;
+  height: 3em;
+  margin:0;
+}
 
 
 /* #footerSection{
