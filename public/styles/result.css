@@ -2,11 +2,12 @@
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
  */
- body {
+body {
   color: #526066;
 }
 
-h2, h3 {
+h2,
+h3 {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 600;
@@ -16,6 +17,9 @@ p {
   line-height: 1.6em;
 }
 
+.h2 {
+  color: #b3aaaa;
+}
 
 /*
 * -- Layout Styles --
@@ -40,7 +44,6 @@ p {
   padding: .5em .7em;
 } */
 
-
 /*
 * -- BANNER --
 * The top banner with the headings. By using a combination
@@ -58,14 +61,14 @@ p {
   width: 100%;
   margin-bottom: 3em;
   display: table;
-} 
+}
 #city {
-height: 600px;
-width: 100%;
-position: absolute;
-top: 0;
-left: 0;
-z-index: -1;
+  height: 600px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 h2.title1 {
   display: inline-block;
@@ -74,48 +77,42 @@ h2.title1 {
   letter-spacing: normal;
 }
 .grid {
-  
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
   background-image: url(https://i.makeagif.com/media/7-22-2017/j9kWHv.gif);
   background-size: cover;
-  
-
 }
 .grid img {
-  
   width: 430px;
   height: 400px;
   margin: auto;
   padding: 10px 19px;
   margin: 0px 20px;
-opacity: .7;
+  opacity: 0.7;
   border-radius: 150px 50px;
-
 }
 #map {
   height: 400px;
   margin: 0px 20px;
 }
 
-.imagIcon{
+.imagIcon {
   width: 4em;
   height: 2.5em;
   position: relative;
-  bottom: .7em;
+  bottom: 0.7em;
 }
 
-
-  .banner-head {
-      display: table-cell;
-      vertical-align: middle;
-      margin-bottom: 0;
-      font-size: 2em;
-      color: white;
-      font-weight: 500;
-      text-shadow: 0 1px 1px rgb(250, 206, 206);
-  }
+.banner-head {
+  display: table-cell;
+  vertical-align: middle;
+  margin-bottom: 0;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgb(250, 206, 206);
+}
 
 .imagehotel {
   width: 200px;
@@ -133,7 +130,6 @@ section {
   flex-direction: column;
 
   position: relative;
-
 }
 
 /* section::before,
@@ -182,14 +178,12 @@ section::after {
   background: hsl(0, 0%, 10%);
 }
 
-
 /* h1 */
 h1 {
   color: var(--other);
   padding: 8px 4px;
   border-bottom: 2px solid var(--other);
 }
-
 
 /* label */
 label {
@@ -205,7 +199,7 @@ label {
   justify-content: center;
 }
 
-.transportLabel{
+.transportLabel {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -228,7 +222,6 @@ input {
   transform: translate(-50%, -50%);
   z-index: -1;
 }
-
 
 /* .design */
 .design {
@@ -260,15 +253,14 @@ input {
 .design:before {
   background: var(--other);
   opacity: 0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .design::after {
   background: var(--primary);
-  opacity: .4;
-  transition: .6s;
+  opacity: 0.4;
+  transition: 0.6s;
 }
-
 
 /* .text */
 .text {
@@ -276,32 +268,30 @@ input {
   font-weight: bold;
 }
 
-
 /* checked state */
-input:checked+.design::before {
+input:checked + .design::before {
   opacity: 1;
-  transform: scale(.6);
+  transform: scale(0.6);
 }
 
-
 /* other states */
-input:hover+.design,
-input:focus+.design {
+input:hover + .design,
+input:focus + .design {
   border: 1px solid var(--primary);
 }
 
-input:hover+.design:before,
-input:focus+.design:before {
+input:hover + .design:before,
+input:focus + .design:before {
   background: var(--primary);
 }
 
-input:hover~.text {
+input:hover ~ .text {
   color: var(--primary);
 }
 
-input:focus+.design::after,
-input:active+.design::after {
-  opacity: .1;
+input:focus + .design::after,
+input:active + .design::after {
+  opacity: 0.1;
   transform: scale(2.6);
 }
 
@@ -309,8 +299,8 @@ input:active+.design::after {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  color: hsla(0, 0%, 0%, .6);
-  background: hsla(0, 0%, 98%, .6);
+  color: hsla(0, 0%, 0%, 0.6);
+  background: hsla(0, 0%, 98%, 0.6);
   font-size: 16px;
 }
 .grid1 {
@@ -319,39 +309,31 @@ input:active+.design::after {
   margin: auto;
   text-align: center;
   gap: 10px;
- 
 }
 .grid1 label {
   text-align: center;
   align-items: center;
- 
 }
 
 .grid1 img {
-  width:400px;
-  height:200px;
+  width: 400px;
+  height: 200px;
 }
 .grid2 {
-/*     
+  /*     
   display: flex;
   justify-content: center;
   justify-content: space-evenly; */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr ;
-
-
-
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-
-/* end hotel css */  
+/* end hotel css */
 /*
 /* 
 /*
 start button css 
 */
-
-
 
 .cta {
   position: relative;
@@ -426,7 +408,6 @@ end button css
 .pricing-tables {
   margin-bottom: 3.125em;
   text-align: center;
-
 }
 
 /*
@@ -439,31 +420,25 @@ end button css
   margin: 0 0.5em 2em;
   /* padding: 0 0 3em; */
   border-radius: 5%;
-      
 }
 
 /*
 * -- PRICING TABLE HEADER COLORS --
 * Choose a different color based on the type of pricing table.
 */
-.pricing-table-free    {
+.pricing-table-free {
   /* background: #519251; */
   background: gray;
-
 }
 
-.pricing-table-biz    {
+.pricing-table-biz {
   /* background: #2c4985; */
   background: gray;
- 
-  /* background-color: white; */
-  
 
+  /* background-color: white; */
 }
 .pricing-table-enterprise {
   background: gray;
-  
-  
 }
 
 /*
@@ -471,21 +446,19 @@ end button css
 * By default, a header is black/white, and has some styles for its <h2> name.
 */
 .pricing-table-header {
-  background: #2d3e50;;
+  background: #2d3e50;
   border-radius: 3%;
   /* color: #fff; */
   width: 250px;
   height: 100px;
   /* color: #fff; */
 }
-  .pricing-table-header h2 {
-      margin: 0;
-      padding-top: 2em;
-      font-size: 1em;
-      font-weight: normal;
-
-  }
-  
+.pricing-table-header h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
 
 /*
 * -- PRICING TABLE PRICE --
@@ -497,17 +470,15 @@ end button css
   font-weight: 100;
   color: #b3aaaa;
 }
-  .pricing-table-price span {
-      display: block;
-      /* text-transform: uppercase; */
-      font-size: 0.2em;
-      padding-bottom: 2em;
-      font-weight: 200;
-      color: rgba(255, 255, 255, 0.5);
-      *color: #fff;
-  }
-
-
+.pricing-table-price span {
+  display: block;
+  /* text-transform: uppercase; */
+  font-size: 0.2em;
+  padding-bottom: 2em;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.5);
+  *color: #fff;
+}
 
 /*
 * -- PRICING TABLE LIST --
@@ -522,13 +493,11 @@ end button css
   border: 1px solid var(--primary); */
 }
 
-
 /*
 * -- PRICING TABLE LIST ELEMENTS --
 * Styles for the individual list elements within each pricing table
 */
 .pricing-table-list li {
-  
   padding: 0.8em 0;
   background: #f7f7f7;
   background: floralwhite;
@@ -537,10 +506,8 @@ end button css
   /* border-bottom: 1px solid #e7e7e7; */
 }
 .ahmad {
-box-shadow: 5px 10px 18px #888888;
-
+  box-shadow: 5px 10px 18px #888888;
 }
-
 
 /*
 * -- PRICING TABLE BUTTON --
@@ -567,11 +534,9 @@ box-shadow: 5px 10px 18px #888888;
   color: #888;
   text-align: center;
 }
-  .footer a {
-      color: #ddd;
-  }
-
-
+.footer a {
+  color: #ddd;
+}
 
 /*
 * -- TABLET MEDIA QUERIES --
@@ -584,14 +549,13 @@ box-shadow: 5px 10px 18px #888888;
   text-transform: none;
   letter-spacing: normal;
   color: var(--other);
-   padding: 8px 4px;
-   /* border-bottom: 2px solid var(--other); */
-  
-} 
+  padding: 8px 4px;
+  /* border-bottom: 2px solid var(--other); */
+}
 
 span.width {
   width: 200px;
-  height:92.4px ;
+  height: 92.4px;
 }
 
 /* @import "header.css";
@@ -601,22 +565,20 @@ height: 7em;
 } */
 
 .footer {
-background: #111;
-position: relative;
-bottom: 0;
-text-align: center;
-padding: 1.5em;
-color: #7f8c8d;
+  background: #111;
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  padding: 1.5em;
+  color: #7f8c8d;
 }
-@media(min-width: 767px) {
-
+@media (min-width: 767px) {
   .banner-head {
-      font-size: 4em;
+    font-size: 4em;
   }
   .pricing-table {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
-
 }
 
 /*
@@ -625,32 +587,31 @@ color: #7f8c8d;
 */
 @media (min-width: 480px) {
   .banner {
-      height: 400px;
+    height: 400px;
   }
   .banner-head {
-      font-size: 3em;
+    font-size: 3em;
   }
 }
 
-.div{
-box-shadow: #cecbcb 2px 2px 2px 2px;
+.div {
+  box-shadow: #cecbcb 2px 2px 2px 2px;
 }
-#cityHeader{
-position: relative;
+#cityHeader {
+  position: relative;
   --primary: hsl(1, 100%, 68%);
   --other: hsl(0, 0%, 90%);
   background: hsl(0, 0%, 10%);
   bottom: 3.4em;
-  box-shadow: gray.07em .07em .07em .07em;
-
+  box-shadow: gray.07em 0.07em 0.07em 0.07em;
 }
-.transport{
-    border: none;
-    border-radius: .7em;
-    width: 70%;
-    box-shadow: #cecbcb .2em .2em .2em .2em;
+.transport {
+  border: none;
+  border-radius: 0.7em;
+  width: 70%;
+  box-shadow: #cecbcb 0.2em 0.2em 0.2em 0.2em;
 }
-.weatherDes{
+.weatherDes {
   font-size: 1.2em;
   font-weight: bold;
   line-height: 2em;
