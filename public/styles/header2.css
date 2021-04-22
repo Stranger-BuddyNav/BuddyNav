@@ -43,9 +43,10 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color:#31326f;
+    margin-bottom: .2em;
+    box-shadow: gray 1em 1em 1em .5em;
 }
-/* .bg{
-} */
 .pure-menu-link {
     padding: .5em .7em;
 }
@@ -146,8 +147,9 @@ a:-webkit-any-link {
     text-decoration: underline;
 }
 #logo {
-    width: 10em;
-    height: 7em;
+    width: 6em;
+    height: 4em;
+    margin:0;
 }
 .footer {
     background: #111;

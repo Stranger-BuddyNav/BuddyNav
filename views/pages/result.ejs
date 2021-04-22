@@ -4,31 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A layout example that shows off a responsive pricing table.">
-    <title>Buudy Nav </title>
     <link rel="stylesheet" href="styles/pure-min.css">
-    <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/grids-responsive-min.css">
     <link rel="stylesheet" href="styles/result.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="Images/Buddy-Nav-icon.png">
+    <title><%= apiAll[3].cityName %> City</title>
 </head>
 <body>
-    <div class="pure-menu pure-menu-horizontal">
-        <img id="logo" class="pure-menu-heading" src="Images/Buddy Nav-01.png" alt="">
-        <!-- <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-        <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Pricing</a></li>
-        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-    </ul> -->
+    <div class="pure-menu pure-menu-horizontal bg">
+        <img id="logo" class="pure-menu-heading" src="Images/Buddy Nav-01 vs2.png" alt="">
         <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Your Plans</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">About Us</a></li>
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item pure-menu-selected"><a href="/allSavedData" class="pure-menu-link">Your Plans</a></li>
+            <li class="pure-menu-item"><a href="about-us.html" class="pure-menu-link">About Us</a></li>
         </ul>
     </div>
     <div class="banner">
-        <h2 class="dark"
-            style="display: inline-block; padding: 10px 30px; letter-spacing: normal;color: white; box-shadow: 5px 10px 18px #888888; font-size: 40px; ">
+        <h2 id="cityHeader" class="dark"
+            style="display: inline-block; padding: 10px 30px; letter-spacing: normal;color: white; font-size: 40px; ">
             <%= apiAll[3].cityName %>
-                </h1> <br>
+                </h2> <br>
                 <% console.log(apiAll) %>
                     <img src="<%= apiAll[0].city_url %> " alt="" id="city"> <br>
     </div>
@@ -41,7 +37,7 @@
                     <div class="pricing-table pricing-table-free">
                         <div class="pricing-table-header">
                             <h2></h2>
-                            <span class="pricing-table-price">
+                            <span class="pricing-table-price" style="font-weight: bolder;">
                                 <%= apiAll[3].temperature %> °C <span> </span>
                             </span>
                         </div>
@@ -61,7 +57,7 @@
                     <div class="pricing-table pricing-table-enterprise">
                         <div class="pricing-table-header">
                             <h2></h2>
-                            <span class="pricing-table-price width ">
+                            <span class="pricing-table-price width weatherDes">
                                 <%= apiAll[3].weather_descriptions %>
                                     <span> </span>
                             </span>
@@ -104,10 +100,10 @@
         </section>
         <section class="light">
             <h1> TRANSPORT </h1>
-            <div class="grid1">
+            <div class="grid1 transport">
                 <% apiAll[2].forEach(element=> {%>
                     <!-- <div> -->
-                    <label>
+                    <label class="transportLabel">
                         <input type="radio" name="station_name" value=" <%= element.station_name %>" checked>
                         <span class="design"></span>
                         <span class="text"></span>
@@ -137,7 +133,7 @@
         <section class="dark">
             <h1>COVID-19</h1>
             <h2 class="title">
-                <%= apiAll[4].country %> population <%= apiAll[4].population %>
+                <%= apiAll[4].country %> population: <%= apiAll[4].population %>
             </h2>
             <div class="pricing-tables pure-g">
                 <div class="pure-u-1 pure-u-md-1-3">
